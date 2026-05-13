@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Aurora</title>
+  <meta name="description" content="Aurora collects nothing. Everything stays on your device.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Privacy Policy — Aurora">
+  <meta property="og:description" content="Aurora collects nothing. Everything stays on your device.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://datnntqn.github.io/aurora-legal/privacy.html">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="brand">
+      <img src="assets/aurora-logo.svg" alt="" class="brand-mark">
+      <span>Aurora</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="support.html">Support</a>
+    </div>
+    <a href="https://apps.apple.com/us/app/aurora-safari-dark-themes/id6751903540" class="nav-download">Download</a>
+  </div>
+</nav>
+
+<main class="legal-page">
+  <div class="container legal-container">
+    <h1>Privacy Policy</h1>
+    <p class="legal-updated">Last updated: May 13, 2026</p>
+
+    <section>
+      <h2>Summary</h2>
+      <p><strong>Aurora collects nothing. There is no server. Everything you do stays on your device.</strong></p>
+      <p>This policy explains what data Aurora can technically access on your device, what it stores locally, and why (almost) nothing leaves your device.</p>
+    </section>
+
+    <section>
+      <h2>What we collect</h2>
+      <p>Nothing. Explicitly:</p>
+      <ul>
+        <li>No analytics</li>
+        <li>No crash reports (only sent to Apple via standard iOS channels if you have opted in via iOS Settings → Privacy &amp; Security → Analytics &amp; Improvements)</li>
+        <li>No browsing history</li>
+        <li>No theme contents</li>
+        <li>No usage statistics</li>
+        <li>No advertising identifiers</li>
+        <li>No email or device identifiers</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What's stored on your device</h2>
+      <p>Aurora stores the following locally in <code>UserDefaults</code> and an App Group container shared between the iOS app, the Safari extension, and the Control Center widget. <strong>This data never leaves your device.</strong></p>
+      <ul>
+        <li>Your theme list (default + custom themes you create)</li>
+        <li>Pro / trial status (from StoreKit)</li>
+        <li>Trial start date (used to compute days remaining)</li>
+        <li>Whitelist / Blacklist site rules</li>
+        <li>Auto Schedule preferences (on/off times per day of week)</li>
+        <li>Integration usage counters (custom themes created count, schedule-used flag) — used by the in-app "trial ended" paywall to remind you what you set up</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Notifications</h2>
+      <p>Aurora schedules up to 3 <strong>local</strong> notifications during your 3-day trial — reminders on days 2, 3, and 4. These are local notifications scheduled by iOS on your device. <strong>No push notification token is registered. No server is involved.</strong> The notifications are cancelled the moment you purchase Pro.</p>
+    </section>
+
+    <section>
+      <h2>What the Safari extension sees</h2>
+      <p>The Safari Web Extension reads each page's CSS to apply dark mode styles. <strong>It does not transmit page content anywhere.</strong> The extension only communicates with Aurora's own host app via Apple's standard Safari Web Extension messaging API — and only to read your theme preferences. Nothing is sent over the network.</p>
+    </section>
+
+    <section>
+      <h2>Apple's role</h2>
+      <p>Aurora uses Apple's StoreKit framework for in-app purchases. Apple processes the transaction; Aurora only sees pass/fail status of your purchase. <a href="https://www.apple.com/legal/privacy/" class="wiki-link">Apple's privacy policy</a> governs your transaction data.</p>
+    </section>
+
+    <section>
+      <h2>Third parties</h2>
+      <p><strong>None.</strong> Aurora does not use any third-party analytics SDKs, advertising networks, crash reporting services (other than Apple's), or any other third-party data processors.</p>
+    </section>
+
+    <section>
+      <h2>Changes to this policy</h2>
+      <p>If this policy changes — for example, if a future version of Aurora adds an opt-in feature requiring data collection — the change will be announced in the app's release notes and on this page. The "Last updated" date above will reflect the change. We'll never quietly start collecting data.</p>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p>Questions about this policy? Email <a href="mailto:dannt.qn.it@gmail.com" class="wiki-link">dannt.qn.it@gmail.com</a>.</p>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="assets/aurora-logo.svg" alt="" class="brand-mark">
+      <strong>Aurora</strong>
+      <p>Made for iOS</p>
+      <p class="footer-copy">© 2026 Built by Danny</p>
+    </div>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html">Support</a>
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:dannt.qn.it@gmail.com">
+        <img src="assets/icons/envelope.svg" alt="" class="feat-icon"> dannt.qn.it@gmail.com
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
