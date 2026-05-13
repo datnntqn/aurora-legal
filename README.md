@@ -29,4 +29,4 @@ Pushed to GitHub `main` branch — Pages serves it automatically. `.nojekyll` di
 
 ## Contact
 
-`dannt.qn.it@gmail.com`
+`danny.ng.it@gmail.com`
