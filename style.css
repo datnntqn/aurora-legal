@@ -1,0 +1,883 @@
+/* ==========================================================================
+   safari-legal — shared stylesheet for Aurora marketing + legal site
+   Vanilla CSS, no framework. Aurora dark gradient theme.
+   ========================================================================== */
+
+/* ---------- 1. Color tokens ---------- */
+:root {
+  --bg-base: #050510;
+  --bg-elevated: #0a0a14;
+  --bg-gradient-1: #1e1b4b;
+  --bg-gradient-2: #4c1d95;
+  --bg-card: rgba(255,255,255,0.04);
+  --bg-card-hover: rgba(255,255,255,0.06);
+  --border-card: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.15);
+
+  --brand-blue: #3b82f6;
+  --brand-purple: #8b5cf6;
+  --brand-pink: #ec4899;
+  --brand-cyan: #06b6d4;
+  --brand-yellow: #fbbf24;
+  --brand-orange: #f59e0b;
+  --brand-green: #10b981;
+  --brand-teal: #14b8a6;
+  --brand-red: #ef4444;
+
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255,255,255,0.75);
+  --text-tertiary: rgba(255,255,255,0.5);
+  --text-muted: rgba(255,255,255,0.4);
+
+  --accent-link: #4d8fff;
+  --success: #10b981;
+  --danger: #ef4444;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-2xl: 32px;
+}
+
+/* ---------- 2. Reset / base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+button { font-family: inherit; cursor: pointer; }
+
+/* ---------- 3. Typography ---------- */
+h1, h2, h3, h4 { margin: 0; line-height: 1.2; font-weight: 800; }
+p { margin: 0; }
+
+/* ---------- 4. Layout container ---------- */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---------- 5. Nav bar (sticky) ---------- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(5,5,16,0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s, border-color 0.3s;
+}
+.site-nav.scrolled {
+  background: rgba(5,5,16,0.92);
+  border-bottom-color: var(--border-card);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 17px;
+}
+.brand-mark { width: 28px; height: 28px; }
+.nav-links {
+  display: flex;
+  gap: 18px;
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.nav-links a:hover { color: var(--text-primary); }
+.nav-download {
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-purple));
+  color: white;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(139,92,246,0.3);
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+}
+
+/* ---------- 6. Hero section ---------- */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-gradient-1) 40%, var(--bg-gradient-2) 100%);
+  padding: 80px 0 60px;
+  overflow: hidden;
+}
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-orb-1 {
+  top: -20%; right: -10%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(139,92,246,0.3) 0%, transparent 70%);
+  animation: float 8s ease-in-out infinite;
+}
+.hero-orb-2 {
+  bottom: -20%; left: -10%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(59,130,246,0.25) 0%, transparent 70%);
+  animation: float 10s ease-in-out infinite reverse;
+}
+.hero-inner {
+  position: relative;
+  text-align: center;
+}
+.hero-title {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 900;
+  line-height: 1.05;
+  background: linear-gradient(90deg, #fff 30%, #c4b5fd 70%, #fff 90%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 5s linear infinite;
+  margin-bottom: 16px;
+}
+.hero-sub {
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 0 auto 28px;
+  line-height: 1.55;
+}
+.trust-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 480px;
+  margin: 0 auto 28px;
+}
+.trust-chip {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  padding: 10px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+.trust-chip strong { display: block; font-size: 13px; }
+.trust-chip span { display: block; font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.cta-app-store {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+.cta-app-store::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: translateX(-100%);
+  animation: sweep 3.5s infinite;
+  pointer-events: none;
+}
+.cta-secondary {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+}
+.cta-secondary:hover { background: var(--bg-card); }
+
+/* Hero phone stack */
+.hero-phone-stack {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  perspective: 900px;
+  margin-top: 32px;
+}
+.hero-phone {
+  width: 180px;
+  aspect-ratio: 9 / 19;
+  background: linear-gradient(135deg, var(--bg-gradient-1), var(--bg-gradient-2));
+  border-radius: 22px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+  padding: 18px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+.hero-phone-left { transform: rotateY(-14deg) translateZ(0); }
+.hero-phone-right { transform: rotateY(14deg) translateZ(0); }
+
+/* ---------- 7. Section common ---------- */
+.section-title {
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 8px;
+  background: linear-gradient(90deg, #fff, #c4b5fd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.section-sub {
+  font-size: 15px;
+  color: var(--text-tertiary);
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 36px;
+}
+.section-badge-only-aurora {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--brand-yellow), var(--brand-orange));
+  color: black;
+  margin-bottom: 14px;
+}
+
+/* Center alignment helper */
+.center { text-align: center; }
+
+/* ---------- 8. Section padding ---------- */
+.section-demo,
+.section-ios,
+.section-eyecare,
+.section-pricing,
+.section-faq {
+  padding: 80px 0;
+}
+.section-demo { background: var(--bg-base); }
+.section-ios { background: var(--bg-elevated); }
+.section-eyecare { background: var(--bg-base); }
+.section-pricing {
+  background: var(--bg-elevated);
+  text-align: center;
+}
+.section-faq { background: var(--bg-base); }
+
+/* ---------- 9. Feature card ---------- */
+.ios-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .ios-grid { grid-template-columns: 1fr 1fr; }
+}
+.ios-feat {
+  background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.ios-feat:hover {
+  transform: translateY(-2px);
+  border-color: rgba(139,92,246,0.4);
+  box-shadow: 0 12px 24px rgba(139,92,246,0.15);
+}
+.ios-feat-focus::before,
+.ios-feat-cc::before,
+.ios-feat-sched::before,
+.ios-feat-siri::before,
+.ios-feat-live::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  right: -25%;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  opacity: 0.15;
+  pointer-events: none;
+}
+.ios-feat-focus::before { background: radial-gradient(circle, var(--brand-pink), transparent 70%); }
+.ios-feat-cc::before { background: radial-gradient(circle, var(--brand-cyan), transparent 70%); }
+.ios-feat-sched::before { background: radial-gradient(circle, var(--brand-orange), transparent 70%); }
+.ios-feat-siri::before { background: radial-gradient(circle, var(--brand-green), transparent 70%); }
+.ios-feat-live::before { background: radial-gradient(circle, var(--brand-purple), transparent 70%); }
+
+.ios-feat-wide { grid-column: 1 / -1; }
+
+.feat-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 5px;
+  background: rgba(239,68,68,0.7);
+  color: white;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  position: relative;
+}
+.feat-h3 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.feat-icon { width: 24px; height: 24px; filter: invert(1) opacity(0.9); }
+.feat-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Mini iPhone frame inside Made-for-iOS cards */
+.phone-mini {
+  position: relative;
+  background: #1a1a1a;
+  border-radius: 30px;
+  padding: 8px;
+  width: 240px;
+  margin: 0 auto;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+.phone-mini-tall { width: 270px; }
+.phone-mini-notch {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 24px;
+  background: #000;
+  border-radius: 14px;
+  z-index: 5;
+}
+.phone-mini-screen {
+  border-radius: 24px;
+  overflow: hidden;
+  aspect-ratio: 9 / 19.5;
+  position: relative;
+  background: #000;
+}
+.phone-mini-screen img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Schedule clock viz (CSS-only) */
+.schedule-viz {
+  background: linear-gradient(180deg, #0a0e2e 0%, #1e3a8a 35%, #f97316 50%, #fbbf24 60%, #0a0e2e 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 28px 0;
+}
+.schedule-clock {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  background: radial-gradient(circle, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+}
+.schedule-clock::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--brand-yellow) 0deg 90deg, #1e3a8a 90deg 270deg, var(--brand-yellow) 270deg 360deg);
+  opacity: 0.4;
+}
+.schedule-sun, .schedule-moon {
+  position: absolute;
+  font-size: 24px;
+  filter: drop-shadow(0 0 8px currentColor);
+}
+.schedule-sun { color: var(--brand-yellow); top: 4px; left: 50%; transform: translateX(-50%); }
+.schedule-moon { color: #c4b5fd; bottom: 4px; left: 50%; transform: translateX(-50%); }
+.schedule-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.75);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 9px;
+  text-align: center;
+  color: white;
+  white-space: nowrap;
+}
+.schedule-center strong { color: var(--brand-yellow); }
+
+/* Siri orb screen */
+.siri-screen {
+  background: #000;
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  padding: 48px 16px 24px;
+  position: relative;
+  text-align: center;
+}
+.siri-screen::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 22px;
+  border: 3px solid;
+  border-image: linear-gradient(45deg, #00d4ff, #a855f7, #ff006e, #00d4ff) 1;
+  animation: siri-pulse 3s linear infinite;
+  pointer-events: none;
+}
+.siri-prompt { color: white; font-size: 13px; font-weight: 600; line-height: 1.3; margin-bottom: 12px; }
+.siri-response {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 8px 10px;
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-align: left;
+  margin-bottom: 8px;
+}
+.siri-orb-img { width: 80px; height: 80px; margin-top: auto; animation: orb-pulse 2s ease-in-out infinite; }
+
+/* ---------- 10. "See the difference" demo iPhone ---------- */
+.demo-phone-wrap {
+  max-width: 360px;
+  margin: 0 auto;
+  position: relative;
+}
+.iphone {
+  position: relative;
+  background: #1a1a1a;
+  border-radius: 44px;
+  padding: 12px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+  transition: box-shadow 0.6s;
+}
+.iphone.dark {
+  box-shadow: 0 40px 100px rgba(139,92,246,0.25), 0 0 0 1px rgba(139,92,246,0.2);
+}
+.iphone-notch {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 32px;
+  background: #000;
+  border-radius: 18px;
+  z-index: 5;
+}
+.iphone-screen {
+  position: relative;
+  border-radius: 34px;
+  overflow: hidden;
+  height: 720px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+.demo-banner {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-purple));
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(139,92,246,0.5);
+  white-space: nowrap;
+  z-index: 6;
+  transition: background 0.6s;
+}
+.iphone.dark .demo-banner { background: linear-gradient(90deg, var(--brand-cyan), var(--brand-purple)); }
+
+/* Safari browser chrome */
+.safari-bar {
+  background: #f2f2f7;
+  padding: 50px 14px 10px;
+  border-bottom: 1px solid #e5e5ea;
+  transition: background 0.6s, border-color 0.6s;
+}
+.url-pill {
+  background: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #1c1c1e;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.6s, color 0.6s;
+}
+.url-pill::before { content: "🔒"; opacity: 0.5; font-size: 10px; }
+.iphone.dark .safari-bar { background: #1c1c1e; border-color: #38383a; }
+.iphone.dark .url-pill { background: #2c2c2e; color: white; }
+
+/* Safari content + Wikipedia */
+.safari-content {
+  flex: 1;
+  overflow-y: auto;
+  background: white;
+  color: #1c1c1e;
+  padding: 16px;
+  font-size: 11px;
+  line-height: 1.55;
+  transition: background 0.6s, color 0.6s;
+}
+.iphone.dark .safari-content { background: #1a1a2e; color: #e8e8e8; }
+
+/* ---------- 11. Wikipedia article styles ---------- */
+.wiki-title {
+  font-family: Georgia, "Linux Libertine", serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: #000;
+  border-bottom: 1px solid #a2a9b1;
+  padding-bottom: 6px;
+  margin-bottom: 6px;
+  transition: color 0.6s, border-color 0.6s;
+}
+.iphone.dark .wiki-title { color: #fff; border-color: #444; }
+.wiki-sub {
+  font-size: 10px;
+  color: #54595d;
+  font-style: italic;
+  margin-bottom: 10px;
+  transition: color 0.6s;
+}
+.iphone.dark .wiki-sub { color: #aaa; }
+.wiki-infobox {
+  float: right;
+  width: 130px;
+  background: #f8f9fa;
+  border: 1px solid #a2a9b1;
+  padding: 6px;
+  margin: 0 0 8px 10px;
+  font-size: 9px;
+  transition: background 0.6s, border-color 0.6s;
+}
+.iphone.dark .wiki-infobox { background: rgba(255,255,255,0.05); border-color: #555; }
+.wiki-img-placeholder {
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(180deg, #0a0e3a 0%, #1e2a8f 30%, #2d5a6f 60%, #1a8f6f 75%, #4aab8f 90%, #1a4a5f 100%);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+.wiki-img-placeholder::before {
+  content: "";
+  position: absolute;
+  top: 30%; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,255,180,0.4) 30%, rgba(120,255,200,0.5) 50%, rgba(180,80,255,0.3) 70%, transparent 100%);
+  filter: blur(3px);
+  transform: skewY(-3deg);
+}
+.wiki-img-caption {
+  font-size: 8px;
+  color: #54595d;
+  text-align: center;
+  margin-top: 4px;
+  line-height: 1.3;
+  transition: color 0.6s;
+}
+.iphone.dark .wiki-img-caption { color: #aaa; }
+.wiki-table { width: 100%; font-size: 8px; margin-top: 6px; }
+.wiki-table td {
+  padding: 2px 0;
+  vertical-align: top;
+  border-top: 1px solid #c8ccd1;
+  transition: border-color 0.6s;
+}
+.iphone.dark .wiki-table td { border-color: #444; }
+.wiki-table td:first-child { font-weight: 700; width: 38%; }
+.wiki-p { margin-bottom: 8px; color: #202122; transition: color 0.6s; }
+.iphone.dark .wiki-p { color: #e8e8e8; }
+.wiki-link { color: #0645ad; text-decoration: underline; transition: color 0.6s; }
+.iphone.dark .wiki-link { color: #4d8fff; }
+.wiki-link-red { color: #ba0000; }
+.iphone.dark .wiki-link-red { color: #ff7a7a; }
+.wiki-toc {
+  background: #f8f9fa;
+  border: 1px solid #a2a9b1;
+  padding: 8px;
+  margin: 10px 0;
+  font-size: 9px;
+  width: 70%;
+  transition: background 0.6s, border-color 0.6s;
+}
+.iphone.dark .wiki-toc { background: rgba(255,255,255,0.05); border-color: #555; }
+.wiki-toc-title { font-weight: 700; font-size: 10px; text-align: center; margin-bottom: 4px; }
+.wiki-toc ol { margin: 0; padding-left: 18px; line-height: 1.6; }
+.wiki-toc ol ol { padding-left: 14px; }
+.wiki-section-h {
+  font-family: Georgia, "Linux Libertine", serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  border-bottom: 1px solid #a2a9b1;
+  padding-bottom: 3px;
+  margin: 14px 0 6px;
+  transition: color 0.6s, border-color 0.6s;
+}
+.iphone.dark .wiki-section-h { color: #fff; border-color: #444; }
+
+/* Demo controls (Without/With Aurora buttons) */
+.demo-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 32px auto 14px;
+  max-width: 360px;
+}
+.demo-btn {
+  flex: 1;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.demo-btn.active {
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-purple));
+  border-color: transparent;
+  box-shadow: 0 0 30px rgba(139,92,246,0.4);
+}
+.demo-caption {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 18px;
+}
+
+/* ---------- 12. Pricing card ---------- */
+.price-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(59,130,246,0.05));
+  border: 1px solid rgba(139,92,246,0.3);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  max-width: 360px;
+  margin: 0 auto;
+  box-shadow: 0 0 60px rgba(139,92,246,0.15);
+}
+.price-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--brand-yellow), var(--brand-orange));
+  color: black;
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+.price-meta-top {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.price-num {
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1;
+  margin: 6px 0;
+}
+.price-meta { font-size: 13px; color: var(--text-tertiary); margin-bottom: 18px; }
+.price-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.9;
+  text-align: left;
+  max-width: 240px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.price-list li::before {
+  content: "✓ ";
+  color: var(--success);
+  font-weight: 700;
+}
+.price-cta { display: inline-block; }
+
+/* ---------- 13. FAQ ---------- */
+.faq-list { max-width: 760px; margin: 0 auto; }
+.faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+.faq-item summary {
+  font-weight: 600;
+  font-size: 15px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-item summary::after {
+  content: "+";
+  opacity: 0.5;
+  font-size: 20px;
+  transition: transform 0.2s;
+}
+.faq-item[open] summary::after { content: "−"; }
+.faq-item p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.faq-item code {
+  background: rgba(255,255,255,0.08);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+/* ---------- 14. Footer ---------- */
+.site-footer {
+  background: var(--bg-base);
+  border-top: 1px solid var(--border-card);
+  padding: 40px 0 30px;
+}
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (min-width: 768px) { .footer-inner { grid-template-columns: 2fr 1fr 1fr; } }
+.footer-brand { display: flex; flex-direction: column; gap: 4px; }
+.footer-brand .brand-mark { width: 32px; margin-bottom: 4px; }
+.footer-brand strong { font-size: 16px; }
+.footer-brand p { font-size: 13px; color: var(--text-tertiary); }
+.footer-copy { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
+.footer-links, .footer-contact { display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: var(--text-secondary); }
+.footer-links a:hover, .footer-contact a:hover { color: var(--text-primary); }
+.footer-contact a { display: flex; align-items: center; gap: 6px; }
+
+/* ---------- 15. Legal pages (privacy/terms/support) ---------- */
+.legal-page {
+  background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-base) 50%);
+  padding: 60px 0 80px;
+  min-height: 70vh;
+}
+.legal-container {
+  max-width: 720px;
+}
+.legal-page h1 { font-size: 38px; margin-bottom: 8px; }
+.legal-updated { color: var(--text-tertiary); font-size: 13px; margin-bottom: 32px; }
+.legal-page section { margin-bottom: 28px; }
+.legal-page section h2 { font-size: 20px; margin-bottom: 10px; color: var(--brand-purple); }
+.legal-page section h2:hover { filter: brightness(1.2); }
+.legal-page section p, .legal-page section li {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+.legal-page section ul { padding-left: 22px; }
+
+/* Bug template (support page) */
+.bug-template {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  font-family: "SF Mono", Monaco, monospace;
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  margin: 16px 0;
+}
+
+/* ---------- 16. Animations ---------- */
+@keyframes shine { to { background-position: 200% center; } }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+@keyframes sweep {
+  0%, 30% { transform: translateX(-100%); }
+  60%, 100% { transform: translateX(200%); }
+}
+@keyframes orb-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+@keyframes siri-pulse {
+  0% { filter: hue-rotate(0); }
+  100% { filter: hue-rotate(360deg); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(139,92,246,0.6); }
+  50% { box-shadow: 0 0 0 6px rgba(139,92,246,0); }
+}
+
+/* Scroll-reveal */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+[data-reveal].in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- 17. Responsive tweaks ---------- */
+@media (max-width: 600px) {
+  .hero { padding: 60px 0 40px; }
+  .trust-strip { grid-template-columns: 1fr; gap: 6px; }
+  .hero-phone-stack { display: none; }
+  .price-card { padding: 24px; }
+  .iphone-screen { height: 600px; }
+  .price-num { font-size: 44px; }
+}
