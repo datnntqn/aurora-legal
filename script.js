@@ -1,94 +1,206 @@
 // safari-legal/script.js
-// Shared interactivity for the Aurora marketing site.
-// Pure vanilla; no framework.
+// Aurora landing page interactivity — vanilla JS, no framework.
+// Effects: sticky nav, scroll-reveal stagger, hero state cycle,
+// drag compare slider, 3D tilt cards, magnetic CTAs, count-up
+// number stats, smooth scroll with offset.
 
 (function() {
   'use strict';
 
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // ---------- Sticky nav state ----------
   const nav = document.querySelector('.site-nav');
   if (nav) {
-    const updateNavState = () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
-    };
+    const updateNavState = () => nav.classList.toggle('scrolled', window.scrollY > 50);
     window.addEventListener('scroll', updateNavState, { passive: true });
     updateNavState();
   }
 
-  // ---------- Scroll-reveal ----------
+  // ---------- Scroll-reveal with stagger ----------
   if ('IntersectionObserver' in window) {
     const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+      entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
+          // Stagger reveals if multiple are visible together
+          setTimeout(() => entry.target.classList.add('in-view'), i * 80);
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
-
-    document.querySelectorAll('[data-reveal]').forEach((el) => {
-      revealObserver.observe(el);
-    });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('[data-reveal]').forEach((el) => revealObserver.observe(el));
   } else {
-    document.querySelectorAll('[data-reveal]').forEach((el) => {
-      el.classList.add('in-view');
-    });
+    document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('in-view'));
   }
 
-  // ---------- "See the difference" auto-cycle ----------
-  const demoPhone = document.getElementById('demo-phone');
-  const demoBanner = document.getElementById('demo-banner');
-  const btnOff = document.getElementById('demo-btn-off');
-  const btnOn = document.getElementById('demo-btn-on');
-
-  if (demoPhone) {
-    let isDark = false;
-    let autoCycleTimer = null;
-
-    const setMode = (dark) => {
-      isDark = dark;
-      demoPhone.classList.toggle('dark', dark);
-      if (demoBanner) {
-        demoBanner.textContent = dark
-          ? 'Aurora: ON · Dark Blue theme'
-          : 'Aurora: OFF';
+  // ---------- Hero state auto-cycle (Light → Dark Blue → Sepia) ----------
+  const heroContent = document.querySelector('[data-hero-content]');
+  if (heroContent && !prefersReducedMotion) {
+    const states = heroContent.querySelectorAll('.hero-state');
+    const heroBar = document.querySelector('.hero-phone-bar');
+    const heroUrl = document.querySelector('.hero-phone-url');
+    let idx = 0;
+    setInterval(() => {
+      states[idx].classList.remove('is-active');
+      idx = (idx + 1) % states.length;
+      states[idx].classList.add('is-active');
+      // Sync the URL bar color to match the state
+      if (heroBar && heroUrl) {
+        if (states[idx].classList.contains('hero-state-dark')) {
+          heroBar.style.background = '#1c1c1e';
+          heroUrl.style.background = '#2c2c2e';
+          heroUrl.style.color = 'white';
+        } else if (states[idx].classList.contains('hero-state-sepia')) {
+          heroBar.style.background = '#ebe4d3';
+          heroUrl.style.background = '#f5f1e8';
+          heroUrl.style.color = '#2c2c2c';
+        } else {
+          heroBar.style.background = '#f2f2f7';
+          heroUrl.style.background = 'white';
+          heroUrl.style.color = '#1c1c1e';
+        }
       }
-      if (btnOff) btnOff.classList.toggle('active', !dark);
-      if (btnOn) btnOn.classList.toggle('active', dark);
+    }, 3500);
+  }
+
+  // ---------- Count-up animation for hero stats ----------
+  const countUp = (el) => {
+    const target = parseFloat(el.dataset.counter);
+    if (isNaN(target) || prefersReducedMotion) {
+      el.textContent = target || el.textContent;
+      return;
+    }
+    const duration = 1200;
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+      el.textContent = Math.round(target * eased);
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  if ('IntersectionObserver' in window) {
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          countUp(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-counter]').forEach((el) => counterObserver.observe(el));
+  }
+
+  // ---------- Compare slider (drag handle) ----------
+  const compare = document.getElementById('compare');
+  const handle = document.getElementById('compare-handle');
+  const darkSide = compare ? compare.querySelector('.compare-dark') : null;
+  if (compare && handle && darkSide) {
+    let isDragging = false;
+
+    const setPosition = (clientX) => {
+      const rect = compare.getBoundingClientRect();
+      let pct = ((clientX - rect.left) / rect.width) * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      darkSide.style.width = pct + '%';
+      handle.style.left = pct + '%';
     };
 
-    const startAutoCycle = () => {
-      autoCycleTimer = setInterval(() => setMode(!isDark), 4000);
+    const onPointerDown = (e) => {
+      isDragging = true;
+      handle.setPointerCapture && handle.setPointerCapture(e.pointerId);
+      e.preventDefault();
     };
-
-    const pauseAutoCycle = () => {
-      if (autoCycleTimer) {
-        clearInterval(autoCycleTimer);
-        autoCycleTimer = null;
-      }
+    const onPointerMove = (e) => {
+      if (!isDragging) return;
+      setPosition(e.clientX);
     };
+    const onPointerUp = () => { isDragging = false; };
 
-    if (btnOff) btnOff.addEventListener('click', () => { pauseAutoCycle(); setMode(false); });
-    if (btnOn) btnOn.addEventListener('click', () => { pauseAutoCycle(); setMode(true); });
+    handle.addEventListener('pointerdown', onPointerDown);
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp);
 
-    // Only auto-cycle while the demo is in view (saves battery).
-    if ('IntersectionObserver' in window) {
+    // Click anywhere on compare to jump handle
+    compare.addEventListener('click', (e) => {
+      if (e.target.closest('.compare-handle')) return;
+      setPosition(e.clientX);
+    });
+
+    // Subtle auto-demo: gently sweep the slider once on first reveal
+    if ('IntersectionObserver' in window && !prefersReducedMotion) {
       const demoObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            startAutoCycle();
-          } else {
-            pauseAutoCycle();
-          }
+          if (!entry.isIntersecting) return;
+          demoObserver.disconnect();
+          // Sweep right to left then back
+          let p = 50;
+          let dir = 1;
+          const sweep = setInterval(() => {
+            p += dir * 1.2;
+            if (p >= 80) dir = -1;
+            if (p <= 30) { clearInterval(sweep); darkSide.style.width = '50%'; handle.style.left = '50%'; return; }
+            darkSide.style.width = p + '%';
+            handle.style.left = p + '%';
+          }, 16);
         });
-      }, { threshold: 0.3 });
-      demoObserver.observe(demoPhone);
-    } else {
-      startAutoCycle();
+      }, { threshold: 0.5 });
+      demoObserver.observe(compare);
     }
   }
 
-  // ---------- Smooth scroll for nav anchors ----------
+  // ---------- 3D tilt on cards ----------
+  if (!prefersReducedMotion) {
+    document.querySelectorAll('[data-tilt]').forEach((card) => {
+      let raf = null;
+      card.addEventListener('pointermove', (e) => {
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          card.style.transform = `perspective(900px) rotateX(${-y * 6}deg) rotateY(${x * 8}deg) translateZ(2px)`;
+        });
+      });
+      card.addEventListener('pointerleave', () => {
+        if (raf) cancelAnimationFrame(raf);
+        card.style.transform = '';
+      });
+    });
+
+    // Hero phone subtle tilt follows cursor on the visual side
+    const heroVisual = document.querySelector('[data-tilt-parent]');
+    const heroPhone = document.querySelector('[data-hero-phone]');
+    if (heroVisual && heroPhone) {
+      heroVisual.addEventListener('pointermove', (e) => {
+        const r = heroVisual.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        heroPhone.style.transform = `rotateY(${-8 + x * 6}deg) rotateX(${2 + -y * 4}deg)`;
+      });
+      heroVisual.addEventListener('pointerleave', () => {
+        heroPhone.style.transform = 'rotateY(-8deg) rotateX(2deg)';
+      });
+    }
+  }
+
+  // ---------- Magnetic buttons ----------
+  if (!prefersReducedMotion) {
+    document.querySelectorAll('[data-magnetic]').forEach((btn) => {
+      btn.addEventListener('pointermove', (e) => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.3}px)`;
+      });
+      btn.addEventListener('pointerleave', () => {
+        btn.style.transform = '';
+      });
+    });
+  }
+
+  // ---------- Smooth scroll for anchor links ----------
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const id = link.getAttribute('href').slice(1);
