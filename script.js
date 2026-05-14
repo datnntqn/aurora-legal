@@ -42,8 +42,11 @@
   // ---------- Living hero — parallax + phone float ----------
   const heroEl = document.getElementById('hero');
   if (heroEl && !prefersReducedMotion) {
-    scrollEffects.push((y) => {
-      // Only meaningful while the hero is on/near screen.
+    let heroH = heroEl.offsetHeight;
+    window.addEventListener('resize', () => { heroH = heroEl.offsetHeight; }, { passive: true });
+    scrollEffects.push((y, vh) => {
+      // Skip the per-frame writes once the hero is fully scrolled past.
+      if (y > heroH + vh) return;
       heroEl.style.setProperty('--mesh-shift',  (y * 0.12) + 'px');
       heroEl.style.setProperty('--grain-shift', (y * 0.28) + 'px');
       heroEl.style.setProperty('--glow-shift',  (y * 0.06) + 'px');
