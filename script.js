@@ -166,25 +166,23 @@
       setPosition(e.clientX);
     });
 
-    // Subtle auto-demo: gently sweep the slider once on first reveal
-    if ('IntersectionObserver' in window && !prefersReducedMotion) {
-      const demoObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          demoObserver.disconnect();
-          // Sweep right to left then back
-          let p = 50;
-          let dir = 1;
-          const sweep = setInterval(() => {
-            p += dir * 1.2;
-            if (p >= 80) dir = -1;
-            if (p <= 30) { clearInterval(sweep); darkSide.style.width = '50%'; handle.style.left = '50%'; return; }
-            darkSide.style.width = p + '%';
-            handle.style.left = p + '%';
-          }, 16);
-        });
-      }, { threshold: 0.5 });
-      demoObserver.observe(compare);
+    // Scroll-scrub: scroll progress through #features drives the divider.
+    // Window (per spec): divider fully left when the section top reaches the
+    // viewport bottom; fully right by the time the section is vertically
+    // centered; holds at all-dark afterward. Suppressed while dragging.
+    if (!prefersReducedMotion) {
+      scrollEffects.push((y, vh) => {
+        if (isDragging) return;
+        const rect = compare.getBoundingClientRect();
+        const start = vh;                              // top === viewport bottom -> p=0
+        const end = vh / 2 - rect.height / 2;          // section centered      -> p=1
+        let p = (start - rect.top) / (start - end);
+        p = Math.max(0, Math.min(1, p));
+        const pct = (p * 100) + '%';
+        darkSide.style.width = pct;
+        handle.style.left = pct;
+      });
+      requestScrollTick();
     }
   }
 
