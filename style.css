@@ -1060,7 +1060,6 @@ p { margin: 0; }
   gap: 10px;
   letter-spacing: -0.01em;
 }
-.bento-icon-svg { width: 28px; height: 28px; filter: invert(1); opacity: 0.92; }
 .bento-p {
   font-size: 14px;
   color: var(--text-secondary);
@@ -1333,6 +1332,7 @@ p { margin: 0; }
 .feature-mini:hover { border-color: rgba(139,92,246,0.3); }
 .feature-mini-icon {
   margin-bottom: 14px;
+  display: block;
 }
 .eye-gradient   { --tile-glow: rgba(6,182,212,0.6); }
 .image-gradient { --tile-glow: rgba(236,72,153,0.6); }
@@ -1361,6 +1361,7 @@ p { margin: 0; }
   justify-content: center;
   flex-shrink: 0;
   position: relative;
+  isolation: isolate;
   background: linear-gradient(150deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02));
   border: 1px solid rgba(255,255,255,0.14);
   box-shadow:
@@ -1387,6 +1388,7 @@ p { margin: 0; }
 .icon-tile-cc    { --tile-glow: rgba(6,182,212,0.55); }
 .icon-tile-sched { --tile-glow: rgba(245,158,11,0.55); }
 .icon-tile-siri  { --tile-glow: rgba(16,185,129,0.55); }
+
 .icon-tile-sm { width: 26px; height: 26px; border-radius: 9px; }
 .icon-tile-sm img, .icon-tile-sm svg { width: 14px; height: 14px; }
 
