@@ -51,10 +51,12 @@ risk on a marketing page).
 
 ### 1.1 Living hero
 
-The hero (`#hero.hero-v2`) currently cycles the phone screen and tilts on cursor.
-Upgrade to:
+The hero (`#hero.hero-v2`) currently cycles the phone screen and tilts on cursor,
+and already has static `.hero-mesh`, `.hero-grain`, and `.hero-glow` elements.
+Enhance those existing elements:
 
-- A slow-drifting animated aurora **gradient mesh** background (`.hero-mesh`).
+- The `.hero-mesh` background gains a slow-drifting animated aurora **gradient
+  mesh**.
 - **Parallax layers** — mesh, grain (`.hero-grain`), and glow (`.hero-glow`) each
   move at different speeds driven by scroll progress.
 - The phone (`[data-hero-phone]`) gently **floats with scroll progress** in
@@ -65,9 +67,13 @@ Upgrade to:
 
 The compare slider (`#compare`) currently auto-sweeps once on reveal. Upgrade so
 that **scroll progress through the `#features` section drives the divider
-position** — scrolling literally wipes the page from light to dark. The existing
-drag + click-to-jump interactions remain fully functional; scroll-scrub and drag
-coexist (user drag takes over, scroll resumes when not dragging).
+position** — scrolling literally wipes the page from light to dark. Scroll
+window: the divider sits fully left (all-light) when the section's top reaches
+the viewport bottom, and fully right (all-dark) by the time the section is
+vertically centered in the viewport; it holds at all-dark as the section
+scrolls out. The existing drag + click-to-jump interactions remain fully
+functional; scroll-scrub and drag coexist (user drag takes over while the
+pointer is captured, scroll-scrub resumes once released).
 
 ### 1.3 Animated bento mockups
 
@@ -106,10 +112,19 @@ Applied consistently across all sections:
   `script.js`. New CSS follows the existing numbered-section convention; new JS
   joins the existing IIFE in `script.js`.
 - **Dead CSS cleanup.** Remove pre-redesign selectors no longer referenced by
-  any of the four HTML files: `.hero-orb`, `.hero-phone-stack`, `.trust-strip`,
-  `.ios-feat*`, `.iphone`, `.demo-phone-wrap`, `.phone-mini`, the `.wiki-*`
-  block. Each selector is grepped across all four HTML files before deletion to
-  confirm it is unused.
+  any of the four HTML files. The grep pass (below) defines the true scope; the
+  following is the illustrative starting list of confirmed-dead selectors:
+  `.hero-orb`, `.hero-phone-stack`, `.trust-strip`, `.ios-feat*`, `.iphone` and
+  its mockup subtree (`.demo-phone-wrap`, `.demo-banner`, `.safari-bar`,
+  `.url-pill`, `.safari-content`), `.phone-mini`, and the unused `.wiki-*`
+  selectors (`.wiki-title`, `.wiki-sub`, `.wiki-infobox`, `.wiki-img-*`,
+  `.wiki-table`, `.wiki-toc`, etc.).
+  **Keep — do NOT remove:** `.wiki-link` is used ~9 times across `privacy.html`,
+  `terms.html`, and `support.html` for styled inline links; keep `.wiki-link-red`
+  and the `.iphone.dark` variants as its companion styling. The `.wiki-*` block
+  is *not* removable as a whole.
+  Each candidate selector is grepped across all four HTML files before deletion
+  to confirm it is unused; the grep result — not this list — is authoritative.
 - **Scroll effects — vanilla, no CDN.** A single rAF-throttled, `passive` scroll
   handler computes scroll progress and feeds both the living-hero parallax and
   the comparison scrub. CSS `animation-timeline: view()` is used as a
