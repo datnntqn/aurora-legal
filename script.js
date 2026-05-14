@@ -17,6 +17,41 @@
     updateNavState();
   }
 
+  // ---------- Shared scroll-progress engine ----------
+  // One rAF-throttled passive listener. Effects register a callback
+  // that receives (scrollY, viewportHeight) each frame.
+  const scrollEffects = [];
+  let scrollTicking = false;
+  const runScrollEffects = () => {
+    const y = window.scrollY;
+    const vh = window.innerHeight;
+    for (let i = 0; i < scrollEffects.length; i++) scrollEffects[i](y, vh);
+    scrollTicking = false;
+  };
+  const requestScrollTick = () => {
+    if (!scrollTicking) {
+      scrollTicking = true;
+      requestAnimationFrame(runScrollEffects);
+    }
+  };
+  if (!prefersReducedMotion) {
+    window.addEventListener('scroll', requestScrollTick, { passive: true });
+    window.addEventListener('resize', requestScrollTick, { passive: true });
+  }
+
+  // ---------- Living hero — parallax + phone float ----------
+  const heroEl = document.getElementById('hero');
+  if (heroEl && !prefersReducedMotion) {
+    scrollEffects.push((y) => {
+      // Only meaningful while the hero is on/near screen.
+      heroEl.style.setProperty('--mesh-shift',  (y * 0.12) + 'px');
+      heroEl.style.setProperty('--grain-shift', (y * 0.28) + 'px');
+      heroEl.style.setProperty('--glow-shift',  (y * 0.06) + 'px');
+      heroEl.style.setProperty('--phone-float', (y * -0.05) + 'px');
+    });
+    requestScrollTick(); // set initial values
+  }
+
   // ---------- Scroll-reveal with stagger ----------
   if ('IntersectionObserver' in window) {
     const revealObserver = new IntersectionObserver((entries) => {

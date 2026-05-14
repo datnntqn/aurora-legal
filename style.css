@@ -556,7 +556,8 @@ p { margin: 0; }
     linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-gradient-1) 100%);
   filter: blur(60px) saturate(1.2);
   pointer-events: none;
-  animation: mesh-drift 20s ease-in-out infinite;
+  animation: mesh-drift 20s ease-in-out infinite, mesh-breathe 14s ease-in-out infinite alternate;
+  translate: 0 var(--mesh-shift, 0);
 }
 .hero-grain {
   position: absolute;
@@ -565,11 +566,16 @@ p { margin: 0; }
   opacity: 0.6;
   pointer-events: none;
   mix-blend-mode: overlay;
+  translate: 0 var(--grain-shift, 0);
 }
 @keyframes mesh-drift {
   0%, 100% { transform: scale(1) translate(0, 0); }
   33% { transform: scale(1.05) translate(20px, -20px); }
   66% { transform: scale(0.98) translate(-15px, 15px); }
+}
+@keyframes mesh-breathe {
+  from { filter: blur(60px) saturate(1.2) hue-rotate(0deg); }
+  to   { filter: blur(70px) saturate(1.35) hue-rotate(18deg); }
 }
 .hero-v2-inner {
   position: relative;
@@ -712,6 +718,7 @@ p { margin: 0; }
   transform-style: preserve-3d;
   transition: transform 0.3s ease-out;
   z-index: 1;
+  translate: 0 var(--phone-float, 0);
 }
 .hero-phone-notch {
   position: absolute;
@@ -799,6 +806,7 @@ p { margin: 0; }
   pointer-events: none;
   z-index: 0;
   animation: float 12s ease-in-out infinite;
+  translate: 0 var(--glow-shift, 0);
 }
 
 /* ---------- Marquee ---------- */
