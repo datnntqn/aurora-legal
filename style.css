@@ -1221,7 +1221,6 @@ p { margin: 0; }
   justify-content: center;
   gap: 4px;
   box-shadow: 0 0 30px rgba(139,92,246,0.6);
-  animation: pulse-glow 2s infinite;
   color: white;
   font-size: 9px;
   font-weight: 700;
@@ -1318,7 +1317,70 @@ p { margin: 0; }
   margin: 0 auto;
   position: relative;
   box-shadow: 0 0 40px rgba(168,85,247,0.6);
-  animation: orb-pulse 2s ease-in-out infinite;
+}
+
+/* ---------- Bento mockup reveal animations ---------- */
+/* All triggered by the existing data-reveal -> .in-view on .bento-card.
+   Default (pre-reveal) state is set here; .in-view plays the animation. */
+
+/* Live Activity: pill slides into the Dynamic Island */
+.bento-card-live .bento-island-pill {
+  opacity: 0;
+  transform: translateX(26px);
+}
+.bento-card-live.in-view .bento-island-pill {
+  animation: bento-pill-in 0.55s cubic-bezier(0.22,0.61,0.36,1) 0.35s forwards;
+}
+@keyframes bento-pill-in {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Control Center: the Aurora tile lights up, then keeps its pulse-glow */
+.bento-card-cc .bento-cc-aurora {
+  opacity: 0.35;
+  transform: scale(0.9);
+}
+.bento-card-cc.in-view .bento-cc-aurora {
+  animation:
+    bento-cc-in 0.5s cubic-bezier(0.22,0.61,0.36,1) 0.3s forwards,
+    pulse-glow 2s ease-in-out 0.8s infinite;
+}
+@keyframes bento-cc-in {
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Schedule: clock hand sweeps sunset -> night */
+.bento-clock-hand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 46%;
+  background: linear-gradient(var(--brand-yellow), transparent);
+  transform-origin: top center;
+  transform: translateX(-50%) rotate(0deg);
+  border-radius: 2px;
+}
+.bento-card-sched.in-view .bento-clock-hand {
+  animation: bento-clock-sweep 1.4s cubic-bezier(0.4,0,0.2,1) 0.3s forwards;
+}
+@keyframes bento-clock-sweep {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to   { transform: translateX(-50%) rotate(180deg); }
+}
+
+/* Siri: orb scales to life (orb-pulse keeps running afterward) */
+.bento-card-siri .bento-siri-orb {
+  opacity: 0;
+  transform: scale(0.6);
+}
+.bento-card-siri.in-view .bento-siri-orb {
+  animation:
+    bento-orb-in 0.5s cubic-bezier(0.22,0.61,0.36,1) 0.3s forwards,
+    orb-pulse 2s ease-in-out 0.8s infinite;
+}
+@keyframes bento-orb-in {
+  to { opacity: 1; transform: scale(1); }
 }
 
 /* ---------- Features row (eye-care) ---------- */
