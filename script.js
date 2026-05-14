@@ -1,8 +1,8 @@
 // safari-legal/script.js
 // Aurora landing page interactivity — vanilla JS, no framework.
-// Effects: sticky nav, scroll-reveal stagger, hero state cycle,
-// drag compare slider, 3D tilt cards, magnetic CTAs, count-up
-// number stats, smooth scroll with offset.
+// Effects: sticky nav, shared rAF scroll engine (parallax + compare scrub),
+// scroll-reveal stagger, hero state cycle, drag + scroll-scrubbed compare
+// slider, 3D tilt cards, magnetic CTAs, count-up number stats, smooth scroll.
 
 (function() {
   'use strict';
@@ -174,8 +174,9 @@
       scrollEffects.push((y, vh) => {
         if (isDragging) return;
         const rect = compare.getBoundingClientRect();
+        if (rect.bottom < 0) return;   // fully scrolled past — nothing to do
         const start = vh;                              // top === viewport bottom -> p=0
-        const end = vh / 2 - rect.height / 2;          // section centered      -> p=1
+        const end = vh / 2 - rect.height / 2;          // compare element centered -> p=1
         let p = (start - rect.top) / (start - end);
         p = Math.max(0, Math.min(1, p));
         const pct = (p * 100) + '%';
