@@ -961,9 +961,9 @@ input[type="range"].blf-slider::-webkit-slider-thumb {
 }
 ```
 
-- [ ] **Step 3: Add `DM Mono` to the Google Fonts link**
+- [ ] **Step 3: Verify `DM Mono` is in the Google Fonts link**
 
-In `index.html` `<head>`, find the existing `<link href="https://fonts.googleapis.com/css2?family=Syne…&family=DM+Sans…">`. Append `&family=DM+Mono:wght@400;500` to its `href` so the mono cue-list and BLF URL render correctly.
+In `index.html` `<head>`, confirm the existing `<link href="https://fonts.googleapis.com/css2?…">` includes `&family=DM+Mono:wght@400;500` (it should — added during Chunk 2 cleanup along with the Syne / DM Sans imports that were missing). If absent, append.
 
 - [ ] **Step 4: Append the BLF slider handler to `script.js`**
 
