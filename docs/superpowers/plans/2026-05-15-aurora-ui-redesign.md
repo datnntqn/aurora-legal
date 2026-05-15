@@ -639,13 +639,6 @@ In `style.css`, in the iOS bento section block, add:
   .bento-card.bento-4 { grid-column: 1; grid-row: 3; }
   .bento-card.bento-5 { grid-column: 2 / span 2; grid-row: 3; }
 }
-@media (min-width: 1100px) {
-  .bento-card.bento-1 { grid-column: 1 / span 2; grid-row: 1 / span 2; }
-  .bento-card.bento-2 { grid-column: 3; grid-row: 1; }
-  .bento-card.bento-3 { grid-column: 3; grid-row: 2; }
-  .bento-card.bento-4 { grid-column: 1; grid-row: 3; }
-  .bento-card.bento-5 { grid-column: 2 / span 2; grid-row: 3; }
-}
 
 /* Moon icon container */
 .moon-icon {

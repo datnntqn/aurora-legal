@@ -1323,13 +1323,6 @@ p { margin: 0; }
   .bento-card.bento-4 { grid-column: 1; grid-row: 3; }
   .bento-card.bento-5 { grid-column: 2 / span 2; grid-row: 3; }
 }
-@media (min-width: 1100px) {
-  .bento-card.bento-1 { grid-column: 1 / span 2; grid-row: 1 / span 2; }
-  .bento-card.bento-2 { grid-column: 3; grid-row: 1; }
-  .bento-card.bento-3 { grid-column: 3; grid-row: 2; }
-  .bento-card.bento-4 { grid-column: 1; grid-row: 3; }
-  .bento-card.bento-5 { grid-column: 2 / span 2; grid-row: 3; }
-}
 
 /* Moon icon container */
 .moon-icon {
@@ -1357,9 +1350,10 @@ p { margin: 0; }
 .bento-card.bento-1 .bento-lock-time,
 .bento-card.bento-1 .bento-lock-date { color: rgba(26,26,42,0.85); }
 .bento-card.bento-1 .bento-live { background: rgba(0,0,0,0.05); }
-.bento-card.bento-2 .bento-focus-row { background: rgba(255,255,255,0.06); }
+.bento-card.bento-2 .bento-focus-row { background: rgba(255,255,255,0.55); }
 .bento-card.bento-2 .bento-focus-row strong,
 .bento-card.bento-2 .bento-focus-row span { color: #1A1A2A; }
+.bento-card.bento-3 .bento-cc-tile { background: rgba(255,255,255,0.10); }
 
 /* ─── EYE-CARE (restructured) ─── */
 .section-marker-wrap { display: flex; gap: 1.25rem; align-items: flex-start; margin-bottom: 2.5rem; }
