@@ -139,7 +139,7 @@ p { margin: 0; }
 .hero {
   position: relative;
   background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-gradient-1) 40%, var(--bg-gradient-2) 100%);
-  padding: 80px 0 60px;
+  padding: 36px 0 24px;
   overflow: hidden;
 }
 .cta-app-store {
@@ -206,7 +206,7 @@ p { margin: 0; }
 .section-ios,
 .section-eyecare,
 .section-pricing {
-  padding: 80px 0;
+  padding: 36px 0;
 }
 .section-demo { background: var(--bg-base); }
 .section-ios { background: var(--bg-elevated); }
@@ -291,7 +291,7 @@ p { margin: 0; }
 
 /* ---------- 17. Responsive tweaks ---------- */
 @media (max-width: 600px) {
-  .hero { padding: 60px 0 40px; }
+  .hero { padding: 28px 0 18px; }
 }
 
 /* ==========================================================================
@@ -434,7 +434,7 @@ p { margin: 0; }
 .hero-v2 {
   position: relative;
   background: var(--bg-base);
-  padding: 100px 0 80px;
+  padding: 40px 0 32px;
   overflow: hidden;
 }
 .hero-mesh {
@@ -618,7 +618,7 @@ p { margin: 0; }
 .tc-bar.m { width: 80%; }
 .tc-bar.t { width: 40%; }
 /* ---------- Section V2 typography ---------- */
-.section-v2 { padding: 100px 0; }
+.section-v2 { padding: 40px 0; }
 .section-eyebrow {
   display: block;
   text-align: center;
@@ -1176,16 +1176,16 @@ p { margin: 0; }
 
 /* ---------- Responsive tweaks v2 ---------- */
 @media (max-width: 900px) {
-  .hero-v2 { padding: 60px 0 50px; }
+  .hero-v2 { padding: 28px 0 24px; }
   .hero-visual { order: -1; }
   .hero-stats { gap: 12px; }
   .hero-stat-num { font-size: 26px; }
-  .section-v2 { padding: 70px 0; }
+  .section-v2 { padding: 32px 0; }
 }
 
 /* ─── MANIFESTO ─── */
 .manifesto {
-  padding: 4.5rem 0;
+  padding: 2rem 0;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -1349,7 +1349,7 @@ input[type="range"].blf-slider::-webkit-slider-thumb { -webkit-appearance: none;
 }
 
 /* ─── PRICING (numeric comparison) ─── */
-.section-pricing { padding: 7rem 0 5rem; text-align: center; }
+.section-pricing { padding: 2.75rem 0 2rem; text-align: center; }
 .price-block { max-width: 620px; margin: 0 auto; }
 .price-row-main {
   display: flex; align-items: baseline; justify-content: center;
@@ -1422,7 +1422,7 @@ input[type="range"].blf-slider::-webkit-slider-thumb { -webkit-appearance: none;
 }
 
 /* ─── FOUNDER ─── */
-.founder-section { padding: 5rem 0 2rem; border-top: 1px solid var(--border); }
+.founder-section { padding: 2rem 0 1.25rem; border-top: 1px solid var(--border); }
 .founder-inner {
   display: flex; align-items: center; justify-content: space-between;
   flex-wrap: wrap; gap: 2rem;
