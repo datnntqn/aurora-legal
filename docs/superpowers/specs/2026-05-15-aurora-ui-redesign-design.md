@@ -11,7 +11,7 @@
 
 Feedback identified the current `index.html` as suffering from 6 specific AI-design anti-patterns:
 
-1. **Every headline reuses the same purple→teal gradient-on-one-word trick.** Loses emphasis through repetition. Words gradient'd: `comfortable`, `exactly`, `every`, `actually`, `once`, `forever`.
+1. **Every headline reuses the same emphasized-word trick.** One headline gets a gradient word (`comfortable`, via `.gradient-text`); the other five get italics on a single word (`exactly`, `every`, `actually`, `once`, `forever` via `<em>`). The two devices read as the same template — emphasize one word per headline, never vary it — and the visual repetition is the problem.
 2. **5 section eyebrows use one identical template** — small all-caps, muted purple, centered, above each headline. (`DRAG TO REVEAL`, `ONLY ON AURORA`, `EYE-CARE TOOLKIT`, `PRICING`, `FAQ`.)
 3. **4 eye-care cards are clones.** Same size, padding, icon style, line count. Reads "AI balanced grid", not designed hierarchy.
 4. **Pricing is the most-common AI template:** single centered card, badge, big price, checklist, CTA.
@@ -57,9 +57,24 @@ The redesign fixes each of these without changing the underlying aesthetic, type
 - The iPhone mockup is dominant on the existing page; replacing it with the theme stack makes the hero feel custom-laid-out rather than generic.
 - Hover effect already prototyped (`aurora_redesigned_sections.html` lines 172–174).
 
+**Orphaned JS to remove:** The iPhone-mockup hero relied on:
+- `hero-state-cycle` handler in `script.js` (cycles `.hero-state-light` / `.hero-state-dark` / `.hero-state-sepia`)
+- `[data-tilt-parent]` on `.hero-visual` driving `[data-hero-phone]`
+- `[data-hero-content]` selector
+
+All three become dead targets after this redesign. **Delete the `hero-state-cycle` handler and the `[data-hero-phone]` tilt code.** The general `[data-tilt]` (used by bento cards) and `[data-magnetic]` (used by CTAs) stay.
+
 **CTAs:** App Store badge + "See it in action ↓" — unchanged.
 
-**Stats row:** Keep current 3 stats but with the reference file's labels: `7 iOS integrations`, `$5.99 once, forever`, `Zero trackers · ever, on any device`.
+**Stats row:** 3 stats arranged as in the reference file (`aurora_redesigned_sections.html` lines 428–441). Each stat is a two-line stack: a bold top line + a `--muted` sub-label.
+
+| Stat | Top line | Sub-label | Counter animation |
+|---|---|---|---|
+| 1 | `7` (Syne 700, 1.5rem) | `iOS integrations` | Yes — keep `data-counter="7"` |
+| 2 | `$5.99` (Syne 700, 1.5rem) | `once, forever` | No — remove `data-counter` (was animating `0`) |
+| 3 | `Zero trackers` (Syne 700, 0.95rem, `--accent2` color) | `ever, on any device` | No — text value, no counter |
+
+The existing `data-counter` JS handler in `script.js` stays in place; only the markup attributes change. Stats 2 and 3 render as static strings.
 
 ### 03 — Manifesto strip (NEW)
 
@@ -83,7 +98,9 @@ EVER.               EVER.               FOR THE TRIAL.
 
 > *What does Aurora actually change?*
 
-Set in Syne weight 500, size `1rem`, color `--muted`, italic, **left-aligned** (not centered). No all-caps. This breaks the eyebrow template most loudly because it's literally a sentence, not a label.
+Set in Syne weight 500, size `1rem`, color `--muted`, `font-style: italic`, **left-aligned** (not centered). No all-caps. This breaks the eyebrow template most loudly because it's literally a sentence, not a label.
+
+> Note: Google Fonts ships Syne only with roman cuts (no true italic). `font-style: italic` will produce a browser-synthesized oblique. If the synthetic obliques look poor on the implementer's machine, fall back to `DM Sans italic` (which IS shipped) for this single line.
 
 **Headline:** `See exactly what changes.` — no gradient word.
 **Sub:** Existing copy.
@@ -115,21 +132,23 @@ Card backgrounds progress chronologically from cream/dawn at the top-left big ca
 
 Light/dark text flip happens at card 3 (dusk). This is the visual narrative — the page literally walks the reader from day to night across the bento, demonstrating what Aurora does.
 
+**Contrast assumption:** Card-1 and Card-2 use `#1A1A2A` text against the *lightest* stop of each gradient (`#F5E6CC` and `#C4A0A8`) — both ≥ 7:1, WCAG AAA. Cards 3–5 use `#F0EFF8` text against gradients darker than `#5D5680` — also ≥ 7:1. The `bento-tag` (small-caps) renders at `opacity: 0.7`; verify ≥ 4.5:1 at implementation. If a tag drops below 4.5:1 on any single card (most likely on Card-2's lightest stop), bump that card's tag to full opacity instead.
+
 #### Moon-derived custom symbol set
 
-5 hand-designed SVG marks at `assets/icons/moon-1.svg` … `moon-5.svg`. Each is a 24×24 circle in a different state:
+5 hand-designed SVG marks at `assets/icons/moon-1.svg` … `moon-5.svg`. All use a 24×24 viewBox, single-color via `currentColor`, stroke width 1.5, no fill on the main circle (fills called out per icon).
 
-| File | Card | Mark |
+| File | Card | Geometry (24×24 viewBox) |
 |---|---|---|
-| `moon-1.svg` | Live Activity | Full circle with a single emphasized pulse dot at the right edge |
-| `moon-2.svg` | Focus Filter | Outlined circle with a smaller concentric target ring + center dot |
-| `moon-3.svg` | Control Center | Half-filled circle (left half solid, right half outline) — the "switch" |
-| `moon-4.svg` | Auto Schedule | Outlined circle with a single radius tick at 5 o'clock (clock hand) |
-| `moon-5.svg` | Siri & Shortcuts | Outlined circle with a 90° sound-wave arc rendered outside it |
+| `moon-1.svg` | Live Activity | `<circle cx=12 cy=12 r=8>` (outline) + `<circle cx=20 cy=12 r=1.5 fill>` (filled pulse dot at right edge) |
+| `moon-2.svg` | Focus Filter | `<circle cx=12 cy=12 r=8>` + `<circle cx=12 cy=12 r=4>` + `<circle cx=12 cy=12 r=1 fill>` (target rings) |
+| `moon-3.svg` | Control Center | `<circle cx=12 cy=12 r=8>` (outline) + `<path d="M12 4 a8 8 0 0 0 0 16 z" fill>` (left half filled) |
+| `moon-4.svg` | Auto Schedule | `<circle cx=12 cy=12 r=8>` + `<line x1=12 y1=12 x2=16 y2=18>` (clock hand at ~5 o'clock) |
+| `moon-5.svg` | Siri & Shortcuts | `<circle cx=11 cy=12 r=7>` (offset left) + `<path d="M21 8 a5 5 0 0 1 0 8">` (sound-wave arc outside the right edge) |
 
-**Styling:** Single-color SVG using `currentColor`. Stroke width 1.5. Size 28×28 rendered. Container: a 40×40 rounded rect (radius 10), translucent border, same `currentColor` semantics so each card's text color drives the icon color.
+**Rendered size:** 22×22 inside a 38×38 rounded-rect container (radius 10). Container background: `rgba(0,0,0,0.08)` with `1px rgba(0,0,0,0.12)` border on light-bg cards (1, 2); `rgba(255,255,255,0.06)` with `1px rgba(255,255,255,0.12)` border on dark-bg cards (3, 4, 5). Icon stroke inherits `currentColor` from the card's text color.
 
-**Existing Lucide icons** (`pulse.svg`, `target.svg`, `sliders-horizontal.svg`, `clock.svg`, `microphone.svg`) stay in the assets folder but are **no longer referenced** from the iOS section. They remain for any other usage (footer, etc.) until proven unused.
+**Existing Lucide icons** (`pulse.svg`, `target.svg`, `sliders-horizontal.svg`, `clock.svg`, `microphone.svg`) are no longer referenced from the iOS section. See "Icon retention" in the Implementation files section for full handling of each existing icon file.
 
 #### Mini-mockups inside each card
 
@@ -143,14 +162,16 @@ Existing bento mockups (Dynamic Island pill, Focus toggle row, Control Center ti
 
 **Eyebrow:** **Left-edge section marker, not a top label.**
 
-A thin vertical line + section number sits to the left of the headline:
+A thin vertical line + section number sits to the left of the headline. The marker text is `§04` (with the section sign).
 
 ```
-04 │  Reading at 2am, made actually easy.
-   │  Aurora is more than a flat black-and-white swap.
+§04 │  Reading at 2am, made actually easy.
+    │  Aurora is more than a flat black-and-white swap.
 ```
 
-Marker: `§04` in Syne weight 700, size `0.7rem`, color `--accent2`. Thin 1px vertical rule, height ~`2.5rem`, in `rgba(255,255,255,0.15)`. Headline left-aligned (not centered), `actually` is **not** italic/gradient'd — kept plain.
+Marker: `§04` in Syne weight 700, size `0.72rem`, color `--accent2`. Thin 1px vertical rule, height ~`2.5rem`, in `rgba(255,255,255,0.15)`. Headline left-aligned (not centered), `actually` is **not** italic/gradient'd — kept plain.
+
+This left-edge section marker is a different device from the manifesto's per-statement numbering (section 03): the marker is one number identifying the section as a whole; the manifesto uses three numbers labeling three parallel statements within one section. They share "uses digits" but not visual placement, scale, or function.
 
 **Grid:** Hero feature + 3 supporting cards.
 
@@ -170,6 +191,28 @@ Marker: `§04` in Syne weight 700, size `0.7rem`, color `--accent2`. Thin 1px ve
 - Headline: `Blue Light Filter` in Syne 700, size 1.75rem.
 - Copy: "Up to 100% reduction. Drag the slider to feel the difference — most dark mode apps skip this entirely."
 - **Interactive demo** (port from `aurora_redesigned_sections.html` lines 502–514, 652–671): article-line mockup that warms toward amber as the slider moves right. Slider, %label, JS handler.
+
+**BLF slider JS** (extracted from reference file for self-containment):
+
+```js
+const slider = document.getElementById('blfSlider');
+const pct = document.getElementById('blfPct');
+const demo = document.getElementById('blfDemo');
+const lines = [1,2,3,4,5].map(i => document.getElementById('l'+i));
+
+slider.addEventListener('input', () => {
+  const v = parseInt(slider.value);
+  pct.textContent = v + '%';
+  const warmth = v / 100;
+  const r = Math.round(79  + warmth * 60);
+  const g = Math.round(195 - warmth * 40);
+  const b = Math.round(200 - warmth * 150);
+  lines.forEach(l => { l.style.background = `rgba(${r},${g},${b},0.18)`; });
+  demo.style.background = `rgb(${Math.round(10 + warmth*15)},${Math.round(21 - warmth*4)},${Math.round(32 - warmth*18)})`;
+});
+```
+
+Element IDs (`blfSlider`, `blfPct`, `blfDemo`, `l1`…`l5`) ship in the eye-care section markup unchanged from the reference file.
 
 **3 supporting cards (right column, stacked):**
 
@@ -241,7 +284,7 @@ No brand logo, no separate brand block.
 | Anti-pattern | Fix in this design |
 |---|---|
 | 1. Gradient word on every headline | Only `comfortable` in the hero gets the gradient. Every other headline is plain. |
-| 2. 5 identical purple all-caps eyebrows | Each section uses a different intro device: dot-badge, none (manifesto), question, sentence, left-edge marker, none, name. No two sections introduce themselves the same way. |
+| 2. 5 identical purple all-caps eyebrows | No two sections use the same *labeled* eyebrow device. The intro devices used: dot-badge pill (Hero), per-statement numbering (Manifesto), italic question (Compare), prose sentence (iOS bento), left-edge `§04` marker (Eye-care), no opener at all (Pricing — the price itself opens the section), name byline (Founder). "No opener" counts as zero-template — Manifesto opens with numbers above statements, not above the section. |
 | 3. 4-card clone grid | BLF gets a tall hero card with live demo; the other 3 are short stacked cards with feature-specific visual cues instead of icons. |
 | 4. Standard pricing template | No card, no badge, no checklist. Two prices typeset large with a strikethrough comparison; FAQ merged in below as plain `<details>`. |
 | 5. Default Lucide icons | 5 custom moon-state SVGs in iOS section; eye-care section drops icons entirely. Existing Lucide files retained in `assets/icons/` only until proven unused. |
@@ -261,10 +304,30 @@ No brand logo, no separate brand block.
 | File | Action |
 |---|---|
 | `index.html` | Restructure: drop marquee, add manifesto, replace founder section, modify all section eyebrows, change hero visual, restructure eye-care grid, simplify pricing+FAQ |
-| `style.css` | Add new section styles: `.manifesto`, `.section-marker`, `.eyebrow-question`, `.eyebrow-sentence`, `.pricing-numeric`, `.founder-block`, new bento color tokens, eye-care hero-supporting grid, theme stack from reference file, BLF demo styles |
-| `script.js` | Port BLF slider live-demo handler from `aurora_redesigned_sections.html`. Existing scripts unchanged. |
+| `style.css` | Add new styles AND remove obsolete styles (see CSS deletion list below) |
+| `script.js` | Port BLF slider live-demo handler from `aurora_redesigned_sections.html` lines 652–671. Delete the `hero-state-cycle` handler and the `[data-hero-phone]` cursor-tilt code (orphaned by the new hero visual). Existing scroll engine, parallax, generic `[data-tilt]`, `[data-magnetic]`, and `[data-counter]` handlers stay. |
 | `assets/icons/moon-1.svg` ... `moon-5.svg` | NEW — 5 hand-designed circle-state marks |
-| `assets/icons/pulse.svg`, `target.svg`, `sliders-horizontal.svg`, `clock.svg`, `microphone.svg` | Unchanged on disk; references removed from `index.html` |
+| Existing `assets/icons/` files | See "Icon retention" below |
+
+**New CSS classes (style.css additions):** `.manifesto`, `.manifesto-item`, `.manifesto-num`, `.manifesto-statement`, `.section-marker`, `.section-marker-num`, `.section-marker-rule`, `.eyebrow-question`, `.eyebrow-sentence`, `.theme-stack`, `.theme-card.c1/c2/c3`, `.tc-pill`, `.tc-bar`, `.bento-1`…`.bento-5` (new day→night gradient classes), `.moon-icon`, `.blf-demo`, `.blf-line`, `.blf-row`, `.blf-thumb`, `.cue-swatches`, `.cue-dots`, `.cue-list`, `.feat-card.hero`, `.support-stack`, `.price-block`, `.price-main`, `.price-once`, `.price-compare`, `.price-strike`, `.price-caption`, `.price-guarantees`, `.faq-block`, `.faq-eyebrow`, `.founder-block`.
+
+**CSS to delete from style.css** (orphaned by this redesign):
+- All `.hero-phone-large`, `.hero-phone-notch`, `.hero-phone-screen`, `.hero-phone-bar`, `.hero-phone-url`, `.hero-phone-content`, `.hero-state*`, `.hero-glow` rules.
+- All `.marquee-section`, `.marquee`, `.marquee-track`, `.marquee-label` rules.
+- Old `.feature-mini` + `.feature-mini-icon` + `.eye-gradient` / `.image-gradient` / `.palette-gradient` / `.list-gradient` rules (replaced by the eye-care hero-supporting grid).
+- Old `.price-card-v2`, `.price-glow`, `.price-tag`, `.price-meta-top`, `.price-num-row`, `.price-currency`, `.price-num-v2`, `.price-meta`, `.price-list-v2`, `.price-check`, `.price-cta` rules **only if** the new pricing block uses a different class namespace (it does — see "New CSS classes" above). Keep `.price-cta` if name reuse is preferred.
+- Old `.bento-card-live`, `.bento-card-focus`, `.bento-card-cc`, `.bento-card-sched`, `.bento-card-siri` gradient backgrounds (replaced by `.bento-1` … `.bento-5`). Keep the inner mockup styles (`.bento-island`, `.bento-focus-row`, `.bento-cc-grid`, `.bento-clock`, `.bento-siri-*`) — they're reused.
+- Old generic icon-tile gradient classes (`.icon-tile-live`, `.icon-tile-focus`, `.icon-tile-cc`, `.icon-tile-sched`, `.icon-tile-siri`) — replaced by `.moon-icon`.
+- Old `.site-footer`, `.footer-inner`, `.footer-brand`, `.footer-links`, `.footer-contact` rules — replaced by founder-block + minimal hairline footer.
+
+**Icon retention:**
+
+| Existing icon | Status |
+|---|---|
+| `pulse.svg`, `target.svg`, `sliders-horizontal.svg`, `clock.svg`, `microphone.svg` | Delete references from `index.html`. Replaced by `moon-1.svg`…`moon-5.svg`. Files can be deleted from disk in a follow-up cleanup — not blocking. |
+| `eye.svg`, `image.svg`, `palette.svg`, `list-checks.svg` | Delete references from `index.html`. Eye-care section drops icons entirely (replaced by feature-specific visual cues: swatches, dots, mono-list). Files can be deleted from disk in a follow-up cleanup. |
+| `envelope.svg` | **Drop the file reference; replace with the `✉` glyph** in the founder email chip (matches `aurora_redesigned_sections.html` line 648). Avoids a single-purpose SVG file. |
+| `moon.svg`, `star.svg`, `caret-down.svg` | Unchanged — used elsewhere (FAQ chevron, theme indicators) and still applicable. |
 
 ## Verification plan
 
