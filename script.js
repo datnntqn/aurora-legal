@@ -50,7 +50,6 @@
       heroEl.style.setProperty('--mesh-shift',  (y * 0.12) + 'px');
       heroEl.style.setProperty('--grain-shift', (y * 0.28) + 'px');
       heroEl.style.setProperty('--glow-shift',  (y * 0.06) + 'px');
-      heroEl.style.setProperty('--phone-float', (y * -0.05) + 'px');
     });
     requestScrollTick(); // set initial values
   }
@@ -175,21 +174,6 @@
         card.style.transform = '';
       });
     });
-
-    // Hero phone subtle tilt follows cursor on the visual side
-    const heroVisual = document.querySelector('[data-tilt-parent]');
-    const heroPhone = document.querySelector('[data-hero-phone]');
-    if (heroVisual && heroPhone) {
-      heroVisual.addEventListener('pointermove', (e) => {
-        const r = heroVisual.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        heroPhone.style.transform = `rotateY(${-8 + x * 6}deg) rotateX(${2 + -y * 4}deg)`;
-      });
-      heroVisual.addEventListener('pointerleave', () => {
-        heroPhone.style.transform = 'rotateY(-8deg) rotateX(2deg)';
-      });
-    }
   }
 
   // ---------- Magnetic buttons ----------
