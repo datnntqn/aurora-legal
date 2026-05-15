@@ -71,36 +71,6 @@
     document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('in-view'));
   }
 
-  // ---------- Hero state auto-cycle (Light → Dark Blue → Sepia) ----------
-  const heroContent = document.querySelector('[data-hero-content]');
-  if (heroContent && !prefersReducedMotion) {
-    const states = heroContent.querySelectorAll('.hero-state');
-    const heroBar = document.querySelector('.hero-phone-bar');
-    const heroUrl = document.querySelector('.hero-phone-url');
-    let idx = 0;
-    setInterval(() => {
-      states[idx].classList.remove('is-active');
-      idx = (idx + 1) % states.length;
-      states[idx].classList.add('is-active');
-      // Sync the URL bar color to match the state
-      if (heroBar && heroUrl) {
-        if (states[idx].classList.contains('hero-state-dark')) {
-          heroBar.style.background = '#1c1c1e';
-          heroUrl.style.background = '#2c2c2e';
-          heroUrl.style.color = 'white';
-        } else if (states[idx].classList.contains('hero-state-sepia')) {
-          heroBar.style.background = '#ebe4d3';
-          heroUrl.style.background = '#f5f1e8';
-          heroUrl.style.color = '#2c2c2c';
-        } else {
-          heroBar.style.background = '#f2f2f7';
-          heroUrl.style.background = 'white';
-          heroUrl.style.color = '#1c1c1e';
-        }
-      }
-    }, 3500);
-  }
-
   // ---------- Count-up animation for hero stats ----------
   const countUp = (el) => {
     const target = parseFloat(el.dataset.counter);
