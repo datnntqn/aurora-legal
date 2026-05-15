@@ -205,8 +205,7 @@ p { margin: 0; }
 .section-demo,
 .section-ios,
 .section-eyecare,
-.section-pricing,
-.section-faq {
+.section-pricing {
   padding: 80px 0;
 }
 .section-demo { background: var(--bg-base); }
@@ -216,7 +215,6 @@ p { margin: 0; }
   background: var(--bg-elevated);
   text-align: center;
 }
-.section-faq { background: var(--bg-base); }
 
 .feat-icon { width: 24px; height: 24px; filter: invert(1) opacity(0.9); }
 
@@ -238,44 +236,6 @@ p { margin: 0; }
   box-shadow: 0 0 60px rgba(139,92,246,0.15);
 }
 .price-cta { display: inline-block; }
-
-/* ---------- 13. FAQ ---------- */
-.faq-list { max-width: 760px; margin: 0 auto; }
-.faq-item {
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-md);
-  padding: 14px 18px;
-  margin-bottom: 8px;
-  cursor: pointer;
-}
-.faq-item summary {
-  font-weight: 600;
-  font-size: 15px;
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.faq-item summary::after {
-  content: "+";
-  opacity: 0.5;
-  font-size: 20px;
-  transition: transform 0.2s;
-}
-.faq-item[open] summary::after { content: "−"; }
-.faq-item p {
-  margin-top: 10px;
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-.faq-item code {
-  background: rgba(255,255,255,0.08);
-  padding: 1px 6px;
-  border-radius: 4px;
-  font-size: 13px;
-}
 
 /* ---------- 14. Footer ---------- */
 .footer-copy { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
@@ -1410,4 +1370,78 @@ input[type="range"].blf-slider::-webkit-slider-thumb { -webkit-appearance: none;
 
 @media (max-width: 900px) {
   .eyecare-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── PRICING (numeric comparison) ─── */
+.section-pricing { padding: 7rem 0 5rem; text-align: center; }
+.price-block { max-width: 620px; margin: 0 auto; }
+.price-row-main {
+  display: flex; align-items: baseline; justify-content: center;
+  gap: .9rem; line-height: 1;
+}
+.price-main {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 7vw, 5rem);
+  letter-spacing: -0.03em;
+}
+.price-once { font-size: 1.4rem; color: var(--muted); }
+.price-compare {
+  display: flex; align-items: baseline; justify-content: center;
+  gap: .8rem; margin-top: 1.3rem; opacity: 0.7;
+  flex-wrap: wrap;
+}
+.price-strike {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+}
+.price-caption { font-size: .85rem; color: var(--muted); font-style: italic; }
+.price-divider { width: 80px; height: 1px; background: var(--border); margin: 2rem auto; }
+.price-guarantees { font-size: .85rem; color: var(--muted); }
+.price-guarantees b { color: var(--text); font-weight: 500; }
+.price-cta { display: inline-block; margin-top: 2rem; }
+.price-cta:hover img { opacity: .9; }
+
+/* ─── FAQ (merged into pricing section) ─── */
+.faq-block { max-width: 680px; margin: 5rem auto 0; text-align: left; }
+.faq-eyebrow {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.faq-block .faq-item {
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--border);
+  background: none; border-top: none; border-left: none; border-right: none;
+}
+.faq-block .faq-item summary {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-block .faq-item summary::-webkit-details-marker { display: none; }
+.faq-block .faq-item summary::after {
+  content: '+';
+  color: var(--muted);
+  font-size: 1.2rem;
+  font-weight: 300;
+  transition: transform .2s;
+}
+.faq-block .faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-block .faq-item p {
+  color: var(--muted);
+  font-size: .9rem;
+  line-height: 1.6;
+  margin-top: .75rem;
 }
