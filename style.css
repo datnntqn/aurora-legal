@@ -38,6 +38,19 @@
   --radius-lg: 16px;
   --radius-xl: 22px;
   --radius-2xl: 32px;
+
+  /* Short aliases used by the redesign's new sections (manifesto, hero
+     theme-stack, iOS bento, eye-care, pricing, founder). Map onto the
+     longer brand tokens above so the design system stays single-sourced. */
+  --bg: var(--bg-base);
+  --bg2: var(--bg-elevated);
+  --bg3: var(--bg-card);
+  --border: var(--border-card);
+  --text: var(--text-primary);
+  --muted: var(--text-tertiary);
+  --accent: var(--brand-purple);
+  --accent2: var(--brand-teal);
+  --pink: var(--brand-pink);
 }
 
 /* ---------- 2. Reset / base ---------- */
