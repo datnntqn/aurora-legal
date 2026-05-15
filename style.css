@@ -237,9 +237,6 @@ p { margin: 0; }
 }
 .price-cta { display: inline-block; }
 
-/* ---------- 14. Footer ---------- */
-.footer-copy { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
-
 /* ---------- 15. Legal pages (privacy/terms/support) ---------- */
 .legal-page {
   background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-base) 50%);
@@ -1444,4 +1441,60 @@ input[type="range"].blf-slider::-webkit-slider-thumb { -webkit-appearance: none;
   font-size: .9rem;
   line-height: 1.6;
   margin-top: .75rem;
+}
+
+/* ─── FOUNDER ─── */
+.founder-section { padding: 5rem 0 2rem; border-top: 1px solid var(--border); }
+.founder-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 2rem;
+}
+.founder-quote { max-width: 560px; }
+.founder-quote p { font-size: 1rem; color: var(--muted); line-height: 1.7; font-style: italic; }
+.founder-quote p strong { color: var(--text); font-style: normal; font-weight: 500; }
+.founder-sig { display: flex; align-items: center; gap: .75rem; margin-top: 1.2rem; }
+.founder-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: grid; place-items: center;
+  font-family: 'Syne', sans-serif;
+  font-size: .9rem; font-weight: 700; color: white;
+  flex-shrink: 0;
+}
+.founder-name { font-size: .9rem; font-weight: 500; }
+.founder-handle { font-size: .78rem; color: var(--muted); }
+.founder-contact a {
+  display: inline-flex; align-items: center; gap: .5rem;
+  color: var(--muted); font-size: .9rem; text-decoration: none;
+  border: 1px solid var(--border); border-radius: 100px;
+  padding: .55rem 1.1rem;
+  transition: color .2s, border-color .2s;
+}
+.founder-contact a:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+/* ─── MINIMAL FOOTER ─── */
+.site-footer-min {
+  padding: 1.5rem 0 2rem;
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+  font-size: .78rem;
+  color: var(--muted);
+}
+.site-footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.site-footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 1.4rem;
+  transition: color .2s;
+}
+.site-footer-links a:hover { color: var(--text); }
+@media (max-width: 720px) {
+  .site-footer-inner { flex-direction: column; align-items: flex-start; gap: .6rem; }
+  .site-footer-links a { margin-left: 0; margin-right: 1rem; }
 }
