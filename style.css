@@ -1288,3 +1288,13 @@ p { margin: 0; }
   .manifesto-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   .manifesto-item:not(:last-child)::after { display: none; }
 }
+
+.eyebrow-question {
+  font-family: 'Syne', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: .9rem;
+  text-align: left;
+}
