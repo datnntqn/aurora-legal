@@ -54,9 +54,11 @@ This keeps the day→night progression (cream top-left → deep-night bottom-rig
    }
    ```
 
-3. **`.bento-mockup-lock` height** — `style.css` line 850, change `min-height: 280px` to `min-height: 160px`. The lockscreen mockup no longer needs the tall canvas it had when bento-1 was a 2×2 hero card.
+3. **`.bento-mockup-lock` height** — `style.css` line 850, change `min-height: 280px` to `min-height: 220px`. The interior stack (`.bento-island` ~42px + `.bento-lock-time` ~64px + `.bento-lock-date` ~16px + `.bento-live` ~66px + container padding ~32px) sums to ~220px; 220 fits without overflow. The lockscreen mockup no longer needs the tall canvas it had when bento-1 was a 2×2 hero card, but going as small as 160px would clip content.
 
-4. **`.bento-card.bento-1 .bento-h` (the headline "Live Activity")** — currently sized for the hero card (~1.6rem via the parent `.bento-card.big` rule from Chunk 1, or whatever it inherited). The bento-1 card is now the same size as the others; the headline should match. **Audit during implementation**: if the heading is visibly larger on bento-1 than on the other cards, add `.bento-card.bento-1 .bento-h { font-size: inherit; }` (or match the other cards' size directly).
+4. **`.bento-card` outer padding** — `style.css` line 789, change `padding: 28px` to `padding: 22px`. The 28px was tuned for the larger hero card; with bento-1 now occupying a regular cell, the surrounding cards' padding can also tighten slightly for a more compact section.
+
+5. **`.bento-h` size on bento-1** — currently all 5 cards share `.bento-h { font-size: 22px }` (style.css line 821), so no per-card override is needed. The headline reads consistently across the row. (The original spec line referenced a `.bento-card.big` rule that doesn't actually exist — removed.)
 
 ### Markup — unchanged
 
