@@ -224,18 +224,6 @@ p { margin: 0; }
 .wiki-link-red { color: #ba0000; }
 .iphone.dark .wiki-link-red { color: #ff7a7a; }
 
-/* ---------- 12. Pricing card ---------- */
-.price-card {
-  position: relative;
-  background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(59,130,246,0.05));
-  border: 1px solid rgba(139,92,246,0.3);
-  border-radius: var(--radius-lg);
-  padding: 32px;
-  max-width: 360px;
-  margin: 0 auto;
-  box-shadow: 0 0 60px rgba(139,92,246,0.15);
-}
-.price-cta { display: inline-block; }
 
 /* ---------- 15. Legal pages (privacy/terms/support) ---------- */
 .legal-page {
@@ -304,7 +292,6 @@ p { margin: 0; }
 /* ---------- 17. Responsive tweaks ---------- */
 @media (max-width: 600px) {
   .hero { padding: 60px 0 40px; }
-  .price-card { padding: 24px; }
 }
 
 /* ==========================================================================
@@ -1191,10 +1178,6 @@ p { margin: 0; }
 .icon-tile-sm { width: 26px; height: 26px; border-radius: 9px; }
 .icon-tile-sm img, .icon-tile-sm svg { width: 14px; height: 14px; }
 
-/* ---------- Pricing V2 ---------- */
-.price-cta { display: block; text-align: center; }
-.price-cta img { margin: 0 auto; }
-
 /* ---------- Responsive tweaks v2 ---------- */
 @media (max-width: 900px) {
   .hero-v2 { padding: 60px 0 50px; }
@@ -1415,7 +1398,6 @@ input[type="range"].blf-slider::-webkit-slider-thumb { -webkit-appearance: none;
 .faq-block .faq-item {
   padding: 1.2rem 0;
   border-bottom: 1px solid var(--border);
-  background: none; border-top: none; border-left: none; border-right: none;
 }
 .faq-block .faq-item summary {
   font-family: 'Syne', sans-serif;
