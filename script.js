@@ -1,8 +1,8 @@
 // safari-legal/script.js
 // Aurora landing page interactivity — vanilla JS, no framework.
 // Effects: sticky nav, shared rAF scroll engine (parallax + compare scrub),
-// scroll-reveal stagger, hero state cycle, drag + scroll-scrubbed compare
-// slider, 3D tilt cards, magnetic CTAs, count-up number stats, smooth scroll.
+// scroll-reveal stagger, drag + scroll-scrubbed compare slider,
+// 3D tilt cards, magnetic CTAs, count-up number stats, smooth scroll.
 
 (function() {
   'use strict';
@@ -39,7 +39,7 @@
     window.addEventListener('resize', requestScrollTick, { passive: true });
   }
 
-  // ---------- Living hero — parallax + phone float ----------
+  // ---------- Living hero — mesh / grain / glow parallax ----------
   const heroEl = document.getElementById('hero');
   if (heroEl && !prefersReducedMotion) {
     let heroH = heroEl.offsetHeight;

@@ -619,7 +619,7 @@ Replace with the matching moon file (table below), wrapped in a `.moon-icon` div
 | `bento-4` (Auto Schedule) | `moon-4.svg` |
 | `bento-5` (Siri & Shortcuts) | `moon-5.svg` |
 
-- [ ] **Step 5: Append day-night CSS rules**
+- [ ] **Step 5: Append day-night CSS rules + bento grid placement**
 
 In `style.css`, in the iOS bento section block, add:
 
@@ -630,6 +630,22 @@ In `style.css`, in the iOS bento section block, add:
 .bento-card.bento-3 { background: linear-gradient(135deg, #5D5680, #3A2F4F); color: #F0EFF8; }
 .bento-card.bento-4 { background: linear-gradient(135deg, #1F1A35, #0F1422); color: #F0EFF8; }
 .bento-card.bento-5 { background: linear-gradient(135deg, #0A0E1A, #050610); color: #F0EFF8; border: 1px solid rgba(255,255,255,0.07); }
+
+/* Bento grid placement (Chunk 1 stripped the old .bento-card-X placement; re-add under new class names) */
+@media (min-width: 720px) {
+  .bento-card.bento-1 { grid-column: 1 / span 2; grid-row: 1 / span 2; }
+  .bento-card.bento-2 { grid-column: 3; grid-row: 1; }
+  .bento-card.bento-3 { grid-column: 3; grid-row: 2; }
+  .bento-card.bento-4 { grid-column: 1; grid-row: 3; }
+  .bento-card.bento-5 { grid-column: 2 / span 2; grid-row: 3; }
+}
+@media (min-width: 1100px) {
+  .bento-card.bento-1 { grid-column: 1 / span 2; grid-row: 1 / span 2; }
+  .bento-card.bento-2 { grid-column: 3; grid-row: 1; }
+  .bento-card.bento-3 { grid-column: 3; grid-row: 2; }
+  .bento-card.bento-4 { grid-column: 1; grid-row: 3; }
+  .bento-card.bento-5 { grid-column: 2 / span 2; grid-row: 3; }
+}
 
 /* Moon icon container */
 .moon-icon {
