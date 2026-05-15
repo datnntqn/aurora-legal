@@ -1298,3 +1298,65 @@ p { margin: 0; }
   margin-bottom: .9rem;
   text-align: left;
 }
+
+.eyebrow-sentence {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: .9rem;
+  max-width: 380px;
+}
+
+/* Day → night bento color story */
+.bento-card.bento-1 { background: linear-gradient(135deg, #F5E6CC, #E8C68A); color: #1A1A2A; }
+.bento-card.bento-2 { background: linear-gradient(135deg, #C4A0A8, #6D5A8E); color: #1A1A2A; }
+.bento-card.bento-3 { background: linear-gradient(135deg, #5D5680, #3A2F4F); color: #F0EFF8; }
+.bento-card.bento-4 { background: linear-gradient(135deg, #1F1A35, #0F1422); color: #F0EFF8; }
+.bento-card.bento-5 { background: linear-gradient(135deg, #0A0E1A, #050610); color: #F0EFF8; border: 1px solid rgba(255,255,255,0.07); }
+
+/* Bento grid placement */
+@media (min-width: 720px) {
+  .bento-card.bento-1 { grid-column: 1 / span 2; grid-row: 1 / span 2; }
+  .bento-card.bento-2 { grid-column: 3; grid-row: 1; }
+  .bento-card.bento-3 { grid-column: 3; grid-row: 2; }
+  .bento-card.bento-4 { grid-column: 1; grid-row: 3; }
+  .bento-card.bento-5 { grid-column: 2 / span 2; grid-row: 3; }
+}
+@media (min-width: 1100px) {
+  .bento-card.bento-1 { grid-column: 1 / span 2; grid-row: 1 / span 2; }
+  .bento-card.bento-2 { grid-column: 3; grid-row: 1; }
+  .bento-card.bento-3 { grid-column: 3; grid-row: 2; }
+  .bento-card.bento-4 { grid-column: 1; grid-row: 3; }
+  .bento-card.bento-5 { grid-column: 2 / span 2; grid-row: 3; }
+}
+
+/* Moon icon container */
+.moon-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  display: grid; place-items: center;
+  background: rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.12);
+  margin-bottom: .9rem;
+}
+.bento-card.bento-1 .moon-icon img,
+.bento-card.bento-2 .moon-icon img { filter: none; }
+.bento-card.bento-3 .moon-icon,
+.bento-card.bento-4 .moon-icon,
+.bento-card.bento-5 .moon-icon {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.12);
+}
+.moon-icon img { width: 22px; height: 22px; }
+.bento-card.bento-3 .moon-icon img,
+.bento-card.bento-4 .moon-icon img,
+.bento-card.bento-5 .moon-icon img { filter: invert(98%) sepia(3%) saturate(290%) hue-rotate(202deg) brightness(101%); }
+
+/* Mockup contrast against day-night card backgrounds */
+.bento-card.bento-1 .bento-island { background: #08080E; color: white; }
+.bento-card.bento-1 .bento-lock-time,
+.bento-card.bento-1 .bento-lock-date { color: rgba(26,26,42,0.85); }
+.bento-card.bento-1 .bento-live { background: rgba(0,0,0,0.05); }
+.bento-card.bento-2 .bento-focus-row { background: rgba(255,255,255,0.06); }
+.bento-card.bento-2 .bento-focus-row strong,
+.bento-card.bento-2 .bento-focus-row span { color: #1A1A2A; }
