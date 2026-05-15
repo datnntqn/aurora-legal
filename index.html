@@ -336,30 +336,76 @@
 <!-- EYE CARE -->
 <section class="section-eyecare section-v2">
   <div class="container">
-    <div class="section-eyebrow">EYE-CARE TOOLKIT</div>
-    <h2 class="section-title-v2">Reading at 2am, made <em>actually</em> easy.</h2>
-    <p class="section-sub-v2">Aurora is more than a flat black-and-white swap.</p>
+    <div class="section-marker-wrap">
+      <div class="section-marker">
+        <div class="section-marker-num">§04</div>
+        <div class="section-marker-rule"></div>
+      </div>
+      <div>
+        <h2 class="section-title-v2 eyecare-headline">Reading at 2am, made actually easy.</h2>
+        <p class="section-sub-v2 eyecare-sub">Aurora is more than a flat black-and-white swap.</p>
+      </div>
+    </div>
 
-    <div class="features-row">
-      <div class="feature-mini" data-reveal data-tilt>
-        <div class="feature-mini-icon icon-tile eye-gradient"><img src="assets/icons/eye.svg" alt=""></div>
-        <h4>Blue Light Filter</h4>
-        <p>Up to 100% reduction. Sleep better, eyes thank you.</p>
+    <div class="eyecare-grid">
+      <!-- Hero feature: Blue Light Filter with live interactive slider -->
+      <div class="feat-card hero" id="blfDemo" data-reveal>
+        <div>
+          <div class="feat-label">Eye-care · Interactive</div>
+          <h3 class="feat-title">Blue Light Filter</h3>
+          <p class="feat-desc">Up to 100% reduction. Drag the slider to feel the difference — most dark mode apps skip this entirely.</p>
+        </div>
+        <div class="blf-demo">
+          <div class="blf-url">aurora.app · dark blue</div>
+          <div class="blf-line" id="l1"></div>
+          <div class="blf-line m" id="l2"></div>
+          <div class="blf-line s" id="l3"></div>
+          <div class="blf-line" id="l4"></div>
+          <div class="blf-line t" id="l5"></div>
+          <div class="blf-row">
+            <span class="blf-row-label">Blue light</span>
+            <input type="range" class="blf-slider" id="blfSlider" min="0" max="100" value="40">
+            <span class="blf-pct" id="blfPct">40%</span>
+          </div>
+        </div>
       </div>
-      <div class="feature-mini" data-reveal data-tilt>
-        <div class="feature-mini-icon icon-tile image-gradient"><img src="assets/icons/image.svg" alt=""></div>
-        <h4>Image Dimming</h4>
-        <p>Tame bright photos and ads. Granular percentage control.</p>
-      </div>
-      <div class="feature-mini" data-reveal data-tilt>
-        <div class="feature-mini-icon icon-tile palette-gradient"><img src="assets/icons/palette.svg" alt=""></div>
-        <h4>Unlimited Themes</h4>
-        <p>7 built-ins + design your own. Sync across iCloud devices.</p>
-      </div>
-      <div class="feature-mini" data-reveal data-tilt>
-        <div class="feature-mini-icon icon-tile list-gradient"><img src="assets/icons/list-checks.svg" alt=""></div>
-        <h4>Per-Site Rules</h4>
-        <p>Whitelist or blacklist. Skip the sites that don't need it.</p>
+
+      <div class="support-stack">
+        <div class="feat-card sm" data-reveal>
+          <div class="feat-label">Image Dimming</div>
+          <h4 class="feat-title sm">Tame bright photos</h4>
+          <p class="feat-desc sm">Granular control, per-site rules.</p>
+          <div class="cue-swatches">
+            <div style="background:#E0E0E0;"></div>
+            <div style="background:#B8B8B8;"></div>
+            <div style="background:#909090;"></div>
+            <div style="background:#686868;"></div>
+            <div style="background:#404040;"></div>
+            <div style="background:#202020;"></div>
+          </div>
+        </div>
+        <div class="feat-card sm" data-reveal>
+          <div class="feat-label">Unlimited Themes</div>
+          <h4 class="feat-title sm">7 built-in + custom</h4>
+          <p class="feat-desc sm">Design your own. Syncs via iCloud.</p>
+          <div class="cue-dots">
+            <div style="background:#0D1B2A;"></div>
+            <div style="background:#1A0A1E;"></div>
+            <div style="background:#0F1A14;"></div>
+            <div style="background:#2A1A0D;"></div>
+            <div style="background:#1A2A28;"></div>
+          </div>
+        </div>
+        <div class="feat-card sm" data-reveal>
+          <div class="feat-label">Per-Site Rules</div>
+          <h4 class="feat-title sm">Whitelist or skip</h4>
+          <p class="feat-desc sm">Skip sites you want untouched.</p>
+          <div class="cue-list">
+            <div><span>wikipedia.org</span> <span class="on">ON</span></div>
+            <div><span>youtube.com</span> <span class="on">ON</span></div>
+            <div><span>news.ycombinator.com</span> <span class="off">OFF</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

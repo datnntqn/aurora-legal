@@ -205,4 +205,22 @@
     });
   });
 
+  // ---------- Blue Light Filter — interactive slider demo ----------
+  const blfSlider = document.getElementById('blfSlider');
+  const blfPct    = document.getElementById('blfPct');
+  const blfDemo   = document.getElementById('blfDemo');
+  const blfLines  = [1,2,3,4,5].map(i => document.getElementById('l'+i));
+  if (blfSlider && blfPct && blfDemo && blfLines.every(Boolean)) {
+    blfSlider.addEventListener('input', () => {
+      const v = parseInt(blfSlider.value, 10);
+      blfPct.textContent = v + '%';
+      const warmth = v / 100;
+      const r = Math.round(79  + warmth * 60);
+      const g = Math.round(195 - warmth * 40);
+      const b = Math.round(200 - warmth * 150);
+      blfLines.forEach(l => { l.style.background = `rgba(${r},${g},${b},0.18)`; });
+      blfDemo.style.background = `rgb(${Math.round(10 + warmth*15)},${Math.round(21 - warmth*4)},${Math.round(32 - warmth*18)})`;
+    });
+  }
+
 })();
