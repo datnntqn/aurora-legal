@@ -145,6 +145,16 @@ The restored block (for reference):
 .marquee-track span:nth-child(odd) { color: var(--text-primary); }
 ```
 
+Add one reduced-motion guard so the section respects OS-level accessibility preferences:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+```
+
+The marquee stays visible (showing the first frame statically) for these users; the message still lands without the scroll.
+
 The `.marquee-label`'s `margin-bottom: 20px` separates the label from the subhead; the subhead's own `margin-bottom: 24px` separates it from the track. No changes needed to the existing label rule.
 
 ## Why this addresses the original removal reason
@@ -161,6 +171,7 @@ This is the smallest change that addresses the critique. If it still reads as ge
 - Open `index.html` in a browser; confirm marquee scrolls left continuously with no visible seam at the wrap point (the duplicate-list trick should hide it).
 - Check that no horizontal scrollbar appears on the page at desktop widths.
 - Resize to mobile (≤480px wide) and confirm the section still reads — label, subhead, and scrolling row all legible.
+- Enable "Reduce motion" in the OS (macOS: System Settings → Accessibility → Display → Reduce motion) and confirm the marquee renders statically without animation.
 - Verify the marquee respects the hero/manifesto rhythm (no awkward gap above or below).
 - Confirm the section's top and bottom hairline borders sit flush against the hero's bottom edge and the manifesto's top edge.
 
