@@ -657,6 +657,9 @@ p { margin: 0; }
 }
 @keyframes marquee { to { transform: translateX(-50%); } }
 .marquee-track span:nth-child(odd) { color: var(--text-primary); }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
 
 /* ---------- Section V2 typography ---------- */
 .section-v2 { padding: 40px 0; }
