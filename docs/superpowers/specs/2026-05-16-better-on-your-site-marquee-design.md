@@ -94,7 +94,7 @@ Site list and duplicate-for-seamless-loop ordering are preserved verbatim from t
 
 Restore the 33 lines of `.marquee*` rules from commit `62f7650` verbatim. All five tokens they reference (`--bg-base`, `--border-card`, `--text-muted`, `--text-tertiary`, `--text-primary`) still exist in `style.css` (lines 8, 14, 27, 29, 30). No token rewrites required.
 
-Insertion point: anywhere in the file that keeps the rules near other section-level blocks. The original location was between an icon-tile rule and the "Section V2 typography" header (`style.css:809` in the old file). The same slot in the current file is fine.
+Insertion point: immediately before the `/* ---------- Section V2 typography ---------- */` comment in `style.css` — the exact slot the rules occupied before commit `62f7650`.
 
 Add one new rule for the subhead:
 
