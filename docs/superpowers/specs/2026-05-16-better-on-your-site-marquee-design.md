@@ -92,7 +92,7 @@ Site list and duplicate-for-seamless-loop ordering are preserved verbatim from t
 
 ### CSS
 
-Restore the 33 lines of `.marquee*` rules from commit `62f7650` verbatim. All five tokens they reference (`--bg-base`, `--border-card`, `--text-muted`, `--text-tertiary`, `--text-primary`) still exist in `style.css` (lines 8, 14, 27, 29, 30). No token rewrites required.
+Restore the 33 lines of `.marquee*` rules from commit `62f7650` verbatim. All five tokens they reference still exist in `style.css`: `--bg-base` (line 8), `--border-card` (line 14), `--text-muted` (line 30), `--text-tertiary` (line 29), `--text-primary` (line 27). No token rewrites required.
 
 Insertion point: immediately before the `/* ---------- Section V2 typography ---------- */` comment in `style.css` — the exact slot the rules occupied before commit `62f7650`.
 
