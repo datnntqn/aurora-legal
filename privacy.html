@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — Aurora</title>
-  <meta name="description" content="Aurora collects nothing. Everything stays on your device.">
+  <meta name="description" content="Aurora collects anonymous usage stats only. No personal data, no IDFA, no tracking across apps.">
   <meta name="robots" content="index, follow">
   <meta property="og:title" content="Privacy Policy — Aurora">
-  <meta property="og:description" content="Aurora collects nothing. Everything stays on your device.">
+  <meta property="og:description" content="Aurora collects anonymous usage stats only. No personal data, no IDFA, no tracking across apps.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://datnntqn.github.io/aurora-legal/privacy.html">
   <link rel="icon" type="image/png" href="assets/aurora-icon-128.png">
@@ -34,26 +34,50 @@
 <main class="legal-page">
   <div class="container legal-container">
     <h1>Privacy Policy</h1>
-    <p class="legal-updated">Last updated: May 13, 2026</p>
+    <p class="legal-updated">Last updated: May 17, 2026</p>
 
     <section>
       <h2>Summary</h2>
-      <p><strong>Aurora collects nothing. There is no server. Everything you do stays on your device.</strong></p>
-      <p>This policy explains what data Aurora can technically access on your device, what it stores locally, and why (almost) nothing leaves your device.</p>
+      <p><strong>Aurora collects anonymous usage statistics only — no personal data, no IDFA, no tracking across other apps. Your browsing history and page contents never leave your device.</strong></p>
+      <p>This policy explains exactly what is collected, what is not, and how to opt out.</p>
     </section>
 
     <section>
       <h2>What we collect</h2>
-      <p>Nothing. Explicitly:</p>
+      <p>Anonymous product usage events via <a href="https://telemetrydeck.com" class="wiki-link">TelemetryDeck</a>, a privacy-first analytics service. The events tell us <em>which features users reach and where they get stuck during onboarding</em> so we can fix what's broken.</p>
+      <p>The events are:</p>
       <ul>
-        <li>No analytics</li>
-        <li>No crash reports (only sent to Apple via standard iOS channels if you have opted in via iOS Settings → Privacy &amp; Security → Analytics &amp; Improvements)</li>
-        <li>No browsing history</li>
-        <li>No theme contents</li>
-        <li>No usage statistics</li>
-        <li>No advertising identifiers</li>
-        <li>No email or device identifiers</li>
+        <li>App launches (count and timestamp)</li>
+        <li>Onboarding step viewed / completed / skipped</li>
+        <li>Safari extension enable / disable detection</li>
+        <li>Paywall viewed / dismissed</li>
+        <li>Purchase completed / failed (no payment details, just outcome)</li>
+        <li>App version and a randomly generated install ID (UUID, regenerated on every reinstall)</li>
       </ul>
+      <p><strong>What we do NOT collect:</strong></p>
+      <ul>
+        <li>No browsing history, URLs, or page contents</li>
+        <li>No theme contents or custom theme designs</li>
+        <li>No personal identifiers — no Apple ID, no email, no name</li>
+        <li>No IDFA (Apple's advertising identifier)</li>
+        <li>No device fingerprint or hardware identifiers</li>
+        <li>No location, contacts, photos, or any other on-device data</li>
+        <li>No tracking across other apps or websites</li>
+        <li>No data shared with advertisers or data brokers</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Analytics provider — TelemetryDeck</h2>
+      <p>Aurora uses <a href="https://telemetrydeck.com" class="wiki-link">TelemetryDeck</a> exclusively for analytics. TelemetryDeck is a Swiss-based, GDPR-compliant analytics service designed for privacy-conscious apps. Their key properties:</p>
+      <ul>
+        <li>No IDFA, no cookies, no cross-app tracking</li>
+        <li>Data hashed before transmission</li>
+        <li>Stored in Switzerland under Swiss data protection law</li>
+        <li>Does not sell or share data with third parties</li>
+      </ul>
+      <p>See their privacy policy: <a href="https://telemetrydeck.com/privacy/" class="wiki-link">telemetrydeck.com/privacy</a>.</p>
+      <p>Because no IDFA or cross-app tracking is involved, Aurora does not show an App Tracking Transparency (ATT) prompt on iOS — none is required.</p>
     </section>
 
     <section>
@@ -86,7 +110,8 @@
 
     <section>
       <h2>Third parties</h2>
-      <p><strong>None.</strong> Aurora does not use any third-party analytics SDKs, advertising networks, crash reporting services (other than Apple's), or any other third-party data processors.</p>
+      <p>One: <strong>TelemetryDeck</strong> (described in the Analytics provider section above) — for anonymous product usage events only.</p>
+      <p>That's it. No advertising networks. No crash reporting services other than Apple's standard channels. No data brokers. No social media SDKs. No marketing attribution services.</p>
     </section>
 
     <section>
