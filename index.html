@@ -3,525 +3,337 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Strip .no-js immediately so scroll-reveal content stays visible when JS is off/slow. -->
   <script>document.documentElement.classList.remove('no-js');</script>
   <title>Aurora — Safari Dark Themes for iOS</title>
-  <meta name="description" content="The only Safari dark mode built for iOS — with Focus Filter, Control Center, Live Activity, and Auto Schedule. Pay once, $5.99 lifetime.">
+  <meta name="description" content="The Safari dark mode that doesn't break the web — themes, brightness, blue-light, image-dimming. Own it for $5.99 once, or $1.99/mo. 3-day free trial. Mac coming soon.">
   <meta name="robots" content="index, follow">
 
   <meta property="og:title" content="Aurora — Safari Dark Themes for iOS">
-  <meta property="og:description" content="The only Safari dark mode built for iOS. Focus Filter, Control Center, Live Activity, Auto Schedule.">
+  <meta property="og:description" content="The Safari dark mode that doesn't break the web. Own it for $5.99, or $1.99/mo. Mac coming soon.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://datnntqn.github.io/aurora-legal/">
   <meta property="og:image" content="https://datnntqn.github.io/aurora-legal/assets/aurora-icon.png">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Aurora — Safari Dark Themes for iOS">
-  <meta name="twitter:description" content="The only Safari dark mode built for iOS.">
+  <meta name="twitter:description" content="The Safari dark mode that doesn't break the web.">
 
   <link rel="icon" type="image/png" href="assets/aurora-icon-128.png">
   <link rel="apple-touch-icon" href="assets/aurora-icon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+
+  <style>
+  :root{
+    --night:#070810; --night2:#0b0d1a; --line:#1c2338;
+    --ink:#eef1f6; --ink2:#c7cede; --muted:#9098ac; --faint:#565d76;
+    --teal:#36e0c8; --blue:#4ba3ff; --violet:#7b61ff; --magenta:#c061ff; --warn:#ffcf6b;
+    --aurora:linear-gradient(90deg,var(--teal),var(--blue),var(--violet),var(--magenta));
+    --sans:"Syne",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    --body:"DM Sans",-apple-system,system-ui,sans-serif;
+    --serif:"Newsreader","Iowan Old Style",Georgia,serif;
+    --mono:"DM Mono",ui-monospace,"SF Mono",Menlo,monospace;
+    --pad:clamp(28px,6vw,72px);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--night);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;line-height:1.55}
+  .c{max-width:1120px;margin:0 auto;padding:0 22px}
+  h1,h2,h3{font-family:var(--sans);letter-spacing:-.02em;margin:0}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .grad{background:var(--aurora);-webkit-background-clip:text;background-clip:text;color:transparent}
+  section{position:relative}
+
+  nav{position:sticky;top:0;z-index:50;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);background:rgba(7,8,16,.72);border-bottom:1px solid var(--line)}
+  .navin{display:flex;align-items:center;gap:18px;height:58px}
+  .brand{display:flex;align-items:center;gap:9px;font-family:var(--sans);font-weight:800;font-size:16px}
+  .brand img{width:24px;height:24px;border-radius:7px}
+  .nlinks{display:flex;gap:20px;margin-left:12px;font-size:13.5px;color:var(--muted)}
+  .nlinks a:hover{color:var(--ink)}
+  @media(max-width:720px){.nlinks{display:none}}
+  .dl{margin-left:auto}.dl img{height:40px}
+
+  .hero{overflow:hidden;padding:56px 0 34px;text-align:center;background:radial-gradient(130% 90% at 50% 130%,#14183a 0%,#0a0b1a 55%,#070810 100%)}
+  .band{position:absolute;left:-20%;right:-20%;top:2%;height:230px;filter:blur(52px);opacity:.8;z-index:0;background:var(--aurora);background-size:200% 100%;
+    -webkit-mask:linear-gradient(180deg,transparent,#000 35%,#000 62%,transparent);mask:linear-gradient(180deg,transparent,#000 35%,#000 62%,transparent);animation:drift 15s ease-in-out infinite alternate}
+  .band.two{top:16%;height:150px;opacity:.45;filter:blur(66px);animation-duration:21s}
+  @keyframes drift{from{background-position:0 50%;transform:translateY(0) skewY(-2deg)}to{background-position:100% 50%;transform:translateY(16px) skewY(2deg)}}
+  .stars{position:absolute;inset:0;z-index:0;opacity:.8;background-image:
+    radial-gradient(1.3px 1.3px at 18% 24%,#fff6,transparent),radial-gradient(1px 1px at 68% 18%,#fff5,transparent),
+    radial-gradient(1.4px 1.4px at 84% 34%,#fff4,transparent),radial-gradient(1px 1px at 38% 14%,#fff5,transparent),
+    radial-gradient(1px 1px at 54% 40%,#fff3,transparent),radial-gradient(1.2px 1.2px at 8% 44%,#fff4,transparent)}
+  .hin{position:relative;z-index:2}
+  .heyebrow{display:inline-flex;gap:16px;flex-wrap:wrap;justify-content:center;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  .heyebrow .live{color:var(--teal)} .heyebrow .soon{color:var(--magenta)}
+  .heyebrow i{width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;margin-right:6px;vertical-align:middle}
+  .htitle{font-size:clamp(32px,6vw,62px);line-height:1.02;font-weight:800;max-width:15ch;margin:0 auto}
+  .hsub{color:var(--ink2);font-size:16px;max-width:52ch;margin:16px auto 0}
+  .rating{display:inline-flex;align-items:center;gap:9px;margin-top:18px;font-size:13.5px;color:var(--muted)}
+  .rating .st{color:var(--warn);letter-spacing:2px}.rating b{color:var(--ink)}
+  .hcta{margin-top:20px;display:flex;justify-content:center}.hcta img{height:52px}
+  .horizon{display:flex;justify-content:center;align-items:flex-end;gap:24px;margin-top:32px}
+  .mb{width:min(560px,60%)}
+  .mb .lid{border-radius:16px 16px 0 0;background:#04050c;border:2px solid #2a3350;border-bottom:0;padding:9px}
+  .scr{border-radius:9px;background:linear-gradient(165deg,#14161f,#0c0d14);position:relative;overflow:hidden}
+  .mb .scr{height:200px}
+  .mb .base{height:12px;background:linear-gradient(#2a3350,#1a2036);border-radius:0 0 13px 13px}
+  .ip{width:108px}.ip .fr{border-radius:22px;background:#04050c;border:2px solid #2a3350;padding:6px}
+  .ip .scr{height:212px;border-radius:15px}
+  .ln{position:absolute;left:14px;right:14px;height:5px;border-radius:3px;background:#242a3b}
+  .ln.g{background:var(--aurora);width:44%}
+  .aa{position:absolute;right:16px;bottom:12px;font-family:var(--serif);font-style:italic;font-size:32px;font-weight:600}
+  .dcap{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;text-align:center;margin-top:8px}
+  .dcap.live{color:var(--teal)}.dcap.soon{color:var(--magenta)}
+
+  .sites{padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center;background:var(--night2)}
+  .sites .lab{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+  .smarq{overflow:hidden;margin-top:12px;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .strack{display:flex;gap:26px;width:max-content;animation:marq 34s linear infinite;font-family:var(--sans);font-weight:600;color:var(--muted);font-size:16px}
+  .strack .dot{color:var(--violet)}
+  @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  .mani{padding:var(--pad) 0}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  @media(max-width:720px){.pillars{grid-template-columns:1fr}}
+  .pil{padding:26px 22px}.pil+.pil{border-left:1px solid var(--line)}
+  @media(max-width:720px){.pil+.pil{border-left:0;border-top:1px solid var(--line)}}
+  .pil .l{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+  .pil .big{font-family:var(--serif);font-size:27px;font-weight:500;margin-top:9px}
+  .pil .u{height:2px;width:38px;background:var(--aurora);border-radius:2px;margin-top:13px}
+  .pil .sm{color:var(--muted);font-size:12.5px;margin-top:9px}
+
+  .shead{text-align:center;max-width:56ch;margin:0 auto 28px}
+  .shead .q{font-family:var(--serif);font-style:italic;color:var(--violet);font-size:15px}
+  .shead h2{font-size:clamp(24px,3.6vw,34px);font-weight:800;margin:6px 0 6px}
+  .shead p{color:var(--muted);font-size:14px;margin:0}
+
+  .demo{padding:var(--pad) 0}
+  .cmp{position:relative;max-width:820px;margin:0 auto;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;user-select:none}
+  .cmp .side{position:absolute;inset:0;padding:18px 20px}
+  .cmp .light{background:#f6f7f9;color:#222}
+  .cmp .dark{background:#0e1016;color:#e8eaf2;clip-path:inset(0 0 0 50%)}
+  .cmp h4{font-family:var(--sans);font-size:15px;margin:0 0 6px}
+  .cmp .tag{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;position:absolute;top:12px;padding:3px 8px;border-radius:6px}
+  .cmp .light .tag{left:12px;background:#e6e8ec;color:#666}
+  .cmp .dark .tag{right:12px;background:#1a2740;color:var(--blue)}
+  .cmp p{font-size:12px;line-height:1.5;margin:6px 0;max-width:60ch}
+  .cmp .light a{color:#0645ad}.cmp .dark a{color:var(--blue)}
+  .cmp .handle{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--aurora);z-index:3;transform:translateX(-1px)}
+  .cmp .knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:#0e1120;border:2px solid var(--violet);display:grid;place-items:center;color:var(--ink);z-index:4;cursor:ew-resize;box-shadow:0 6px 18px rgba(0,0,0,.5);font-size:14px}
+
+  .ios{padding:var(--pad) 0}
+  .bento{display:grid;grid-template-columns:1.5fr 1fr 1fr;grid-auto-rows:132px;gap:12px}
+  @media(max-width:720px){.bento{grid-template-columns:1fr 1fr;grid-auto-rows:auto}}
+  .bc{background:#0e1120;border:1px solid var(--line);border-radius:15px;padding:16px;position:relative;overflow:hidden}
+  .bc.big{grid-row:span 2}
+  .bc .tg{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+  .bc.mac .tg{color:var(--magenta)}
+  .bc h3{font-size:15.5px;margin:9px 0 4px;font-weight:700}
+  .bc p{font-size:11.5px;color:var(--muted);margin:0}
+  .bc .glow{position:absolute;right:-34px;bottom:-34px;width:130px;height:130px;border-radius:50%;background:var(--aurora);filter:blur(42px);opacity:.2}
+  .bc.mac .aaB{position:absolute;right:16px;top:14px;font-family:var(--serif);font-style:italic;font-size:34px;font-weight:600}
+  .soonp{display:inline-block;margin-top:10px;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--magenta);border:1px solid rgba(192,97,255,.4);padding:2px 7px;border-radius:999px}
+  .bc .mi{width:22px;height:22px;opacity:.85;margin-bottom:2px}
+
+  .eye{padding:var(--pad) 0}
+  .eyegrid{display:grid;grid-template-columns:1.3fr 1fr;gap:14px}
+  @media(max-width:760px){.eyegrid{grid-template-columns:1fr}}
+  .fcard{background:#0e1120;border:1px solid var(--line);border-radius:15px;padding:18px;position:relative;overflow:hidden}
+  .fcard .fl{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+  .fcard h3{font-size:18px;margin:8px 0 4px;font-weight:700}
+  .fcard p{font-size:12.5px;color:var(--muted);margin:0}
+  .warmfx{position:absolute;inset:0;background:linear-gradient(#ff9d2e,#ff7a3c);pointer-events:none;mix-blend-mode:multiply;opacity:.4;transition:opacity .1s}
+  .blf{position:relative;margin-top:14px;background:#0a0c14;border:1px solid var(--line);border-radius:12px;padding:12px;z-index:1}
+  .blf .url{font-family:var(--mono);font-size:10px;color:var(--faint);margin-bottom:8px}
+  .blfl{height:6px;border-radius:3px;background:#2a3040;margin:5px 0}
+  .blfl.g{background:var(--aurora);width:44%}
+  .blfrow{display:flex;align-items:center;gap:10px;margin-top:10px}
+  .blfrow label{font-size:11px;color:var(--muted)}
+  input[type=range]{flex:1;accent-color:var(--warn)}
+  .blfpct{font-family:var(--mono);font-size:12px;color:var(--warn)}
+  .estack{display:flex;flex-direction:column;gap:14px}
+  .scard{background:#0e1120;border:1px solid var(--line);border-radius:14px;padding:14px}
+  .scard .fl{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .scard h4{font-size:14px;margin:6px 0 3px;font-weight:700}.scard p{font-size:11.5px;color:var(--muted);margin:0}
+  .sw{display:flex;gap:5px;margin-top:9px}.sw div{width:22px;height:14px;border-radius:4px}
+
+  .rev{padding:var(--pad) 0;background:var(--night2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .rstat{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-bottom:22px;font-family:var(--mono)}
+  .rstat .s{text-align:center}
+  .rstat .s b{font-family:var(--sans);font-size:24px;font-weight:800;letter-spacing:-.02em}
+  .rstat .s .st{background:var(--aurora);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .rstat .s span{display:block;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:3px}
+  .rmarq{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+  .rtrack{display:flex;gap:16px;width:max-content;animation:marq 46s linear infinite}
+  .vq{flex:none;width:300px;padding:17px 19px;border-radius:14px;background:#0e1120;border:1px solid var(--line)}
+  .vq .st{color:var(--warn);font-size:10px;letter-spacing:1px}
+  .vq q{font-family:var(--serif);font-style:italic;font-size:15.5px;line-height:1.4;display:block;quotes:none;margin:7px 0 9px;color:#e7ecf6}
+  .vq .by{font-size:11px;color:var(--muted)}
+  .vq.reddit{border-color:rgba(255,120,60,.45)}
+  .vq .red{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#ff8a4c}
+
+  .price{padding:var(--pad) 0}
+  .pcards{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;align-items:stretch}
+  .pc{background:#0e1120;border:1px solid var(--line);border-radius:18px;padding:22px 24px;min-width:230px;position:relative}
+  .pc.hero{border-color:rgba(123,97,255,.5);background:radial-gradient(120% 120% at 0 0,rgba(123,97,255,.14),transparent 60%),#0e1120}
+  .pc .plan{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .pc .amt{font-family:var(--sans);font-size:38px;font-weight:800;margin:8px 0 2px}.pc .amt small{font-size:15px;color:var(--muted);font-weight:600}
+  .pc .n{font-size:12px;color:var(--muted)}
+  .pc .best{position:absolute;top:-10px;right:16px;font-family:var(--mono);font-size:8.5px;font-weight:800;color:var(--night);background:var(--aurora);padding:3px 9px;border-radius:999px;letter-spacing:.06em}
+  .pc .cta{margin-top:16px;text-align:center;font-size:14px;font-weight:700;padding:12px;border-radius:12px;background:#fff;color:var(--night)}
+  .pc.sub .cta{background:transparent;color:var(--ink);border:1px solid rgba(255,255,255,.2)}
+  .pcap{text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:16px}
+
+  .faq{padding:0 0 var(--pad)}
+  .faq details{border-top:1px solid var(--line);padding:15px 4px}
+  .faq summary{font-family:var(--sans);font-weight:600;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:10px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";color:var(--violet)}
+  .faq details[open] summary::after{content:"\2013"}
+  .faq p{color:var(--muted);font-size:13.5px;margin:10px 0 0;max-width:70ch}
+  .faq a{color:var(--blue)}
+
+  .founder{padding:var(--pad) 0;border-top:1px solid var(--line);text-align:center}
+  .founder .fq{font-family:var(--serif);font-size:clamp(18px,2.6vw,24px);line-height:1.4;max-width:60ch;margin:0 auto;color:var(--ink2)}
+  .founder .fq b{color:var(--ink)}
+  .fsig{display:flex;gap:11px;align-items:center;justify-content:center;margin-top:16px}
+  .fav{width:36px;height:36px;border-radius:50%;background:var(--aurora);display:grid;place-items:center;color:var(--night);font-weight:800}
+  .fname{font-weight:700;font-size:13px;text-align:left}.fhandle{font-size:11px;color:var(--muted);text-align:left}
+
+  footer{border-top:1px solid var(--line);padding:20px 0;color:var(--faint);font-size:12.5px}
+  .fin{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .fin a{color:var(--muted)}.fin a:hover{color:var(--ink)}
+  a:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  @media(prefers-reduced-motion:reduce){.band,.strack,.rtrack{animation:none}}
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="site-nav">
-  <div class="container nav-inner">
-    <a href="#hero" class="brand">
-      <img src="assets/aurora-icon-128.png" alt="" class="brand-mark">
-      <span>Aurora</span>
-    </a>
-    <div class="nav-links">
-      <a href="#features">Demo</a>
-      <a href="#made-for-ios">Made for iOS</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
-      <a href="support.html">Support</a>
+<nav><div class="c navin">
+  <a class="brand" href="#hero"><img src="assets/aurora-icon-128.png" alt="">Aurora</a>
+  <div class="nlinks"><a href="#demo">Demo</a><a href="#ios">Made for iOS</a><a href="#reviews">Reviews</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="support.html">Support</a></div>
+  <a class="dl" href="https://apps.apple.com/us/app/aurora-safari-dark-themes/id6751903540"><img src="assets/app-store-badge.svg" alt="Download on the App Store"></a>
+</div></nav>
+
+<header id="hero" class="hero">
+  <div class="stars"></div><div class="band"></div><div class="band two"></div>
+  <div class="c hin">
+    <div class="heyebrow"><span class="live"><i></i>Live on iOS &amp; iPadOS</span><span class="soon"><i></i>Mac — rising soon</span></div>
+    <h1 class="htitle">Turn the glare into <span class="grad">your kind of night.</span></h1>
+    <p class="hsub">The Safari dark mode that doesn't break the web — themes, brightness, blue-light, image-dimming. Soon on Mac: your own reading font on any site.</p>
+    <div class="rating"><span class="st">★★★★★</span><b>4.9</b> · 2,500+ downloads · loved in 10+ countries</div>
+    <div class="hcta"><a href="https://apps.apple.com/us/app/aurora-safari-dark-themes/id6751903540"><img src="assets/app-store-badge.svg" alt="Download on the App Store"></a></div>
+    <div class="horizon">
+      <div class="mb"><div class="lid"><div class="scr"><div class="ln" style="top:22px"></div><div class="ln g" style="top:34px"></div><div class="ln" style="top:46px"></div><div class="ln" style="top:58px;width:72%"></div><div class="ln" style="top:70px;width:58%"></div><span class="aa grad">Aa</span></div></div><div class="base"></div><div class="dcap soon">macOS · coming soon</div></div>
+      <div class="ip"><div class="fr"><div class="scr"><div class="ln" style="top:20px"></div><div class="ln g" style="top:32px"></div><div class="ln" style="top:44px"></div><div class="ln" style="top:56px;width:64%"></div></div></div><div class="dcap live">iOS · live today</div></div>
     </div>
-    <a href="https://apps.apple.com/us/app/aurora-safari-dark-themes/id6751903540" class="nav-download" data-magnetic>Download</a>
-  </div>
-</nav>
-
-<!-- HERO — 2 column on desktop, smaller title -->
-<header id="hero" class="hero hero-v2">
-  <div class="hero-mesh"></div>
-  <div class="hero-grain"></div>
-  <div class="container hero-v2-inner">
-
-    <div class="hero-copy">
-      <div class="hero-eyebrow">
-        <span class="hero-dot"></span>
-        <span>Now on the App Store</span>
-      </div>
-      <h1 class="hero-title-v2">
-        <span class="word">Your</span>
-        <span class="word">web,</span>
-        <span class="word">made</span>
-        <span class="word gradient-text">comfortable.</span>
-      </h1>
-      <p class="hero-sub-v2">
-        The only Safari dark mode <strong>built for iOS</strong> — with Focus Filter,
-        Control Center, Live Activity, and features no other app has.
-      </p>
-
-      <div class="hero-cta-v2">
-        <a href="https://apps.apple.com/us/app/aurora-safari-dark-themes/id6751903540" class="cta-app-store" data-magnetic>
-          <img src="assets/app-store-badge.svg" alt="Download on the App Store" height="52">
-        </a>
-        <a href="#features" class="cta-secondary cta-link">
-          <span>See it in action</span>
-          <span class="arrow">↓</span>
-        </a>
-      </div>
-
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-num" data-counter="7">0</div>
-          <div class="hero-stat-label">iOS integrations</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">$5.99</div>
-          <div class="hero-stat-label">once, forever</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num stat-privacy">Zero trackers</div>
-          <div class="hero-stat-label">ever, on any device</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-visual">
-      <div class="theme-stack">
-        <div class="theme-card c1">
-          <div class="tc-pill">Dark Blue</div>
-          <div class="tc-bar"></div>
-          <div class="tc-bar m"></div>
-          <div class="tc-bar s"></div>
-          <div class="tc-bar"></div>
-          <div class="tc-bar t"></div>
-        </div>
-        <div class="theme-card c2">
-          <div class="tc-pill">Sepia</div>
-          <div class="tc-bar"></div>
-          <div class="tc-bar s"></div>
-          <div class="tc-bar m"></div>
-          <div class="tc-bar t"></div>
-          <div class="tc-bar"></div>
-        </div>
-        <div class="theme-card c3">
-          <div class="tc-pill">Forest</div>
-          <div class="tc-bar"></div>
-          <div class="tc-bar m"></div>
-          <div class="tc-bar"></div>
-          <div class="tc-bar s"></div>
-          <div class="tc-bar t"></div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </header>
 
-<!-- BETTER ON YOUR SITE — supported-sites marquee -->
-<section class="marquee-section">
-  <p class="marquee-label">Better on your site</p>
-  <p class="marquee-sub">Aurora themes every site you read — these are the ones we tune by hand.</p>
-  <div class="marquee">
-    <div class="marquee-track">
-      <span>Wikipedia</span><span>·</span>
-      <span>YouTube</span><span>·</span>
-      <span>Google</span><span>·</span>
-      <span>Reddit</span><span>·</span>
-      <span>Twitter / X</span><span>·</span>
-      <span>Amazon</span><span>·</span>
-      <span>Medium</span><span>·</span>
-      <span>The New York Times</span><span>·</span>
-      <span>CNN</span><span>·</span>
-      <span>Pinterest</span><span>·</span>
-      <span>IMDb</span><span>·</span>
-      <span>Walmart</span><span>·</span>
-      <span>Etsy</span><span>·</span>
-      <span>Slack</span><span>·</span>
-      <!-- duplicate for seamless loop -->
-      <span>Wikipedia</span><span>·</span>
-      <span>YouTube</span><span>·</span>
-      <span>Google</span><span>·</span>
-      <span>Reddit</span><span>·</span>
-      <span>Twitter / X</span><span>·</span>
-      <span>Amazon</span><span>·</span>
-      <span>Medium</span><span>·</span>
-      <span>The New York Times</span><span>·</span>
-      <span>CNN</span><span>·</span>
-      <span>Pinterest</span><span>·</span>
-      <span>IMDb</span><span>·</span>
-      <span>Walmart</span><span>·</span>
-      <span>Etsy</span><span>·</span>
-      <span>Slack</span>
-    </div>
+<section class="sites"><div class="c">
+  <div class="lab">Tuned by hand for the sites you read</div>
+  <div class="smarq"><div class="strack" id="strack"></div></div>
+</div></section>
+
+<section class="mani"><div class="c"><div class="pillars">
+  <div class="pil"><div class="l">01 · Ownership</div><div class="big">Own it forever.</div><div class="u"></div><div class="sm">$5.99 once — or $1.99/mo. Lifetime, not a rental.</div></div>
+  <div class="pil"><div class="l">02 · Privacy</div><div class="big">No tracking. Ever.</div><div class="u"></div><div class="sm">Anonymous stats only. Your browsing never leaves your device.</div></div>
+  <div class="pil"><div class="l">03 · The trial</div><div class="big">No card to try.</div><div class="u"></div><div class="sm">3-day free trial. No payment info required.</div></div>
+</div></div></section>
+
+<section class="demo" id="demo"><div class="c">
+  <div class="shead"><div class="q">What does Aurora actually change?</div><h2>See exactly what changes.</h2><p>A real Wikipedia article. Aurora keeps layout, links &amp; images — only adapts colours. Drag the handle.</p></div>
+  <div class="cmp" id="cmp">
+    <div class="side light"><span class="tag">Without Aurora</span><h4>Aurora</h4><p style="color:#888">From Wikipedia, the free encyclopedia</p><p>An <strong>aurora</strong> is a natural light display in <a>Earth's upper atmosphere</a>, caused by <a>charged particles</a> from the Sun.</p><p>Collisions excite <a>oxygen</a> and <a>nitrogen</a>, emitting green, red and purple light.</p></div>
+    <div class="side dark" id="cmpdark"><span class="tag">With Aurora · Dark Blue</span><h4>Aurora</h4><p style="color:#8b94a8">From Wikipedia, the free encyclopedia</p><p>An <strong>aurora</strong> is a natural light display in <a>Earth's upper atmosphere</a>, caused by <a>charged particles</a> from the Sun.</p><p>Collisions excite <a>oxygen</a> and <a>nitrogen</a>, emitting green, red and purple light.</p></div>
+    <div class="handle" id="handle"></div><div class="knob" id="knob">⇆</div>
   </div>
-</section>
+</div></section>
 
-<!-- MANIFESTO — three refusals -->
-<section class="manifesto">
-  <div class="container manifesto-grid">
-    <div class="manifesto-item">
-      <div class="manifesto-num">01</div>
-      <div class="manifesto-statement">No subscription. Ever.</div>
-    </div>
-    <div class="manifesto-item">
-      <div class="manifesto-num">02</div>
-      <div class="manifesto-statement">No tracking. Ever.</div>
-    </div>
-    <div class="manifesto-item">
-      <div class="manifesto-num">03</div>
-      <div class="manifesto-statement">No card for the trial.</div>
-    </div>
+<section class="ios" id="ios"><div class="c">
+  <div class="shead"><div class="q">Integrations no other Safari app ships.</div><h2>Built into every corner of <span class="grad">your day.</span></h2><p>Each card is something only Aurora ships — now reaching for the Mac.</p></div>
+  <div class="bento">
+    <div class="bc big mac"><span class="aaB grad">Aa</span><div class="tg">Mac · exclusive</div><h3>Your reading font, any site</h3><p>Change the web font &amp; size on any website — the Mac-only power, on top of the full theming engine.</p><span class="soonp">◷ coming soon</span><div class="glow"></div></div>
+    <div class="bc"><img class="mi" src="assets/icons/pulse.svg" alt=""><div class="tg">iOS 16+</div><h3>Live Activity</h3><p>Aurora status on Lock Screen &amp; Dynamic Island.</p></div>
+    <div class="bc"><img class="mi" src="assets/icons/sliders-horizontal.svg" alt=""><div class="tg">Control Center</div><h3>One-tap toggle</h3><p>Flip dark mode from anywhere.</p></div>
+    <div class="bc"><img class="mi" src="assets/icons/target.svg" alt=""><div class="tg">Focus filter</div><h3>Follows your Focus</h3><p>Dark at night, light by day — automatically.</p></div>
+    <div class="bc"><img class="mi" src="assets/icons/palette.svg" alt=""><div class="tg">Themes</div><h3>Colour, your way</h3><p>Not just invert — pick the exact tint.</p><div class="glow"></div></div>
   </div>
-</section>
+</div></section>
 
-<!-- SEE THE DIFFERENCE — Drag slider -->
-<section id="features" class="section-demo section-v2" data-reveal>
-  <div class="container">
-    <div class="eyebrow-question"><em>What does Aurora actually change?</em></div>
-    <h2 class="section-title-v2">See exactly what changes.</h2>
-    <p class="section-sub-v2">Real Wikipedia article. Aurora preserves layout, links, images — only adapts colors. Drag the handle.</p>
-
-    <div class="compare-wrap">
-      <div class="compare" id="compare">
-        <!-- Light layer (bottom) -->
-        <div class="compare-side compare-light">
-          <div class="compare-label">Without Aurora</div>
-          <div class="compare-browser">
-            <div class="compare-bar"><span></span><span></span><span></span></div>
-            <div class="compare-content compare-content-light">
-              <h3>Aurora</h3>
-              <p class="muted">From Wikipedia, the free encyclopedia</p>
-              <p>An <strong>aurora</strong> is a natural light display in <a>Earth's upper atmosphere</a> caused by <a>charged particles</a> from the Sun colliding with atoms in the atmosphere.</p>
-              <p>These collisions excite <a>oxygen</a> and <a>nitrogen</a>, which emit light of different colors: green, red, and purple.</p>
-              <p>In the <a>Arctic</a> they're called <em>northern lights</em>; in the <a>Antarctic</a>, <em>southern lights</em>.</p>
-              <div class="compare-callout">
-                <strong>Contents</strong>
-                <ol><li><a>Etymology</a></li><li><a>Causes</a></li><li><a>Extraterrestrial auroras</a></li></ol>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Dark layer (top, clipped) -->
-        <div class="compare-side compare-dark">
-          <div class="compare-label dark-label">With Aurora · Dark Blue</div>
-          <div class="compare-browser dark">
-            <div class="compare-bar dark"><span></span><span></span><span></span></div>
-            <div class="compare-content compare-content-dark">
-              <h3>Aurora</h3>
-              <p class="muted">From Wikipedia, the free encyclopedia</p>
-              <p>An <strong>aurora</strong> is a natural light display in <a>Earth's upper atmosphere</a> caused by <a>charged particles</a> from the Sun colliding with atoms in the atmosphere.</p>
-              <p>These collisions excite <a>oxygen</a> and <a>nitrogen</a>, which emit light of different colors: green, red, and purple.</p>
-              <p>In the <a>Arctic</a> they're called <em>northern lights</em>; in the <a>Antarctic</a>, <em>southern lights</em>.</p>
-              <div class="compare-callout dark">
-                <strong>Contents</strong>
-                <ol><li><a>Etymology</a></li><li><a>Causes</a></li><li><a>Extraterrestrial auroras</a></li></ol>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Drag handle -->
-        <div class="compare-handle" id="compare-handle">
-          <div class="compare-handle-bar"></div>
-          <div class="compare-handle-knob">
-            <span class="arrow-left">‹</span>
-            <span class="arrow-right">›</span>
-          </div>
-        </div>
+<section class="eye"><div class="c">
+  <div class="shead"><div class="q">Eye-care</div><h2>Reading at 2am, made actually easy.</h2><p>More than a flat black-and-white swap.</p></div>
+  <div class="eyegrid">
+    <div class="fcard"><div class="warmfx" id="warmfx"></div>
+      <div class="fl">Interactive</div><h3>Blue Light Filter</h3><p>Up to 100% reduction. Drag to feel it — most dark-mode apps skip this.</p>
+      <div class="blf"><div class="url">aurora.app · dark blue</div><div class="blfl" style="width:80%"></div><div class="blfl g"></div><div class="blfl" style="width:65%"></div><div class="blfl" style="width:72%"></div>
+        <div class="blfrow"><label for="blf">Blue light</label><input type="range" id="blf" min="0" max="100" value="40"><span class="blfpct" id="blfpct">40%</span></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- MADE FOR iOS — Bento grid -->
-<section id="made-for-ios" class="section-ios section-v2">
-  <div class="container">
-    <p class="eyebrow-sentence">Five integrations no other Safari app ships.</p>
-    <h2 class="section-title-v2">Built into every corner of iOS.</h2>
-    <p class="section-sub-v2">Each card is a feature only Aurora ships on iOS.</p>
-
-    <div class="bento">
-      <!-- Big card: Live Activity (spans 2x1 on desktop) -->
-      <article class="bento-card bento-1" data-reveal data-tilt>
-        <span class="bento-tag">UNIQUE · iOS 16+</span>
-        <div class="moon-icon">
-          <img src="assets/icons/moon-1.svg" alt="">
-        </div>
-        <h3 class="bento-h">
-          Live Activity
-        </h3>
-        <p class="bento-p">Aurora status on your Lock Screen and Dynamic Island. See what's on without opening the app.</p>
-        <div class="bento-mockup bento-mockup-lock">
-          <div class="bento-island">
-            <span class="bento-island-moon"></span>
-            <span class="bento-island-text">Aurora ON</span>
-            <span class="bento-island-pill">Dark Blue</span>
-          </div>
-          <div class="bento-lock-time">9:41</div>
-          <div class="bento-lock-date">Tuesday · May 13</div>
-          <div class="bento-live">
-            <div class="bento-live-icon"></div>
-            <div class="bento-live-text">
-              <div class="bento-live-t">Aurora · ON</div>
-              <div class="bento-live-s">Dark Blue · until 7:00 AM</div>
-            </div>
-            <div class="bento-live-dot"></div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Focus Filter -->
-      <article class="bento-card bento-2" data-reveal data-tilt>
-        <span class="bento-tag">UNIQUE</span>
-        <div class="moon-icon">
-          <img src="assets/icons/moon-2.svg" alt="">
-        </div>
-        <h3 class="bento-h">
-          Focus Filter
-        </h3>
-        <p class="bento-p">Auto-toggle when you enter Sleep, Reading, or any iOS Focus mode.</p>
-        <div class="bento-mockup bento-mockup-focus">
-          <div class="bento-focus-row">
-            <div class="bento-focus-icon"></div>
-            <div class="bento-focus-label">
-              <strong>Aurora</strong>
-              <span>Enable · ON</span>
-            </div>
-            <span class="bento-focus-check">✓</span>
-          </div>
-          <div class="bento-focus-row dim">
-            <div class="bento-focus-icon dim"></div>
-            <div class="bento-focus-label">
-              <strong>Dark Appearance</strong>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Control Center -->
-      <article class="bento-card bento-3" data-reveal data-tilt>
-        <span class="bento-tag">UNIQUE · iOS 18+</span>
-        <div class="moon-icon">
-          <img src="assets/icons/moon-3.svg" alt="">
-        </div>
-        <h3 class="bento-h">
-          Control Center
-        </h3>
-        <p class="bento-p">One tap from anywhere. No app launch needed.</p>
-        <div class="bento-mockup bento-mockup-cc">
-          <div class="bento-cc-grid">
-            <div class="bento-cc-tile"></div>
-            <div class="bento-cc-tile bento-cc-aurora">
-              <div class="bento-cc-moon"></div>
-              <span>Aurora</span>
-            </div>
-            <div class="bento-cc-tile"></div>
-            <div class="bento-cc-tile"></div>
-            <div class="bento-cc-tile"></div>
-            <div class="bento-cc-tile"></div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Auto Schedule -->
-      <article class="bento-card bento-4" data-reveal data-tilt>
-        <span class="bento-tag">UNIQUE</span>
-        <div class="moon-icon">
-          <img src="assets/icons/moon-4.svg" alt="">
-        </div>
-        <h3 class="bento-h">
-          Auto Schedule
-        </h3>
-        <p class="bento-p">Sunset → Sunrise, or custom times per weekday.</p>
-        <div class="bento-mockup bento-mockup-sched">
-          <div class="bento-clock">
-            <div class="bento-clock-hand"></div>
-            <div class="bento-clock-sun"></div>
-            <div class="bento-clock-moon"></div>
-            <div class="bento-clock-center">
-              <div class="bento-clock-label">ON</div>
-              <div class="bento-clock-time">6:30 PM</div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Siri & Shortcuts -->
-      <article class="bento-card bento-5" data-reveal data-tilt>
-        <span class="bento-tag">UNIQUE</span>
-        <div class="moon-icon">
-          <img src="assets/icons/moon-5.svg" alt="">
-        </div>
-        <h3 class="bento-h">
-          Siri &amp; Shortcuts
-        </h3>
-        <p class="bento-p">"Hey Siri, turn on dark mode." Or chain it in Shortcuts.</p>
-        <div class="bento-mockup bento-mockup-siri">
-          <div class="bento-siri-quote">"Hey Siri, turn on dark mode"</div>
-          <div class="bento-siri-reply">Done. Aurora is using your Dark Blue theme.</div>
-          <div class="bento-siri-orb"></div>
-        </div>
-      </article>
+    <div class="estack">
+      <div class="scard"><div class="fl">Image dimming</div><h4>Tame bright photos</h4><p>Granular, per-site.</p><div class="sw"><div style="background:#e0e0e0"></div><div style="background:#a8a8a8"></div><div style="background:#707070"></div><div style="background:#383838"></div></div></div>
+      <div class="scard"><div class="fl">Unlimited themes</div><h4>7 built-in + custom</h4><p>Design your own · iCloud sync.</p><div class="sw"><div style="background:#0d1b2a"></div><div style="background:#1a0a1e"></div><div style="background:#0f1a14"></div><div style="background:#2a1a0d"></div></div></div>
+      <div class="scard"><div class="fl">Per-site rules</div><h4>Whitelist or skip</h4><p>Skip sites you want untouched.</p></div>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- EYE CARE -->
-<section class="section-eyecare section-v2">
-  <div class="container">
-    <div class="section-marker-wrap">
-      <div class="section-marker">
-        <div class="section-marker-num">§04</div>
-        <div class="section-marker-rule"></div>
-      </div>
-      <div>
-        <h2 class="section-title-v2 eyecare-headline">Reading at 2am, made actually easy.</h2>
-        <p class="section-sub-v2 eyecare-sub">Aurora is more than a flat black-and-white swap.</p>
-      </div>
-    </div>
+<section class="rev" id="reviews"><div class="c">
+  <div class="shead"><div class="q">In their words</div><h2>Loved by readers who read at night.</h2></div>
+  <div class="rstat"><div class="s"><b class="st">4.9★</b><span>App Store</span></div><div class="s"><b>2,500+</b><span>downloads</span></div><div class="s"><b>195</b><span>in a day · one Reddit post</span></div><div class="s"><b>10+</b><span>countries</span></div></div>
+  <div class="rmarq"><div class="rtrack" id="rtrack"></div></div>
+</div></section>
 
-    <div class="eyecare-grid">
-      <!-- Hero feature: Blue Light Filter with live interactive slider -->
-      <div class="feat-card hero" id="blfDemo" data-reveal>
-        <div>
-          <div class="feat-label">Eye-care · Interactive</div>
-          <h3 class="feat-title">Blue Light Filter</h3>
-          <p class="feat-desc">Up to 100% reduction. Drag the slider to feel the difference — most dark mode apps skip this entirely.</p>
-        </div>
-        <div class="blf-demo">
-          <div class="blf-url">aurora.app · dark blue</div>
-          <div class="blf-line" id="l1"></div>
-          <div class="blf-line m" id="l2"></div>
-          <div class="blf-line s" id="l3"></div>
-          <div class="blf-line" id="l4"></div>
-          <div class="blf-line t" id="l5"></div>
-          <div class="blf-row">
-            <label class="blf-row-label" for="blfSlider">Blue light</label>
-            <input type="range" class="blf-slider" id="blfSlider" min="0" max="100" value="40">
-            <span class="blf-pct" id="blfPct">40%</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="support-stack">
-        <div class="feat-card sm" data-reveal>
-          <div class="feat-label">Image Dimming</div>
-          <h4 class="feat-title sm">Tame bright photos</h4>
-          <p class="feat-desc sm">Granular control, per-site rules.</p>
-          <div class="cue-swatches">
-            <div style="background:#E0E0E0;"></div>
-            <div style="background:#B8B8B8;"></div>
-            <div style="background:#909090;"></div>
-            <div style="background:#686868;"></div>
-            <div style="background:#404040;"></div>
-            <div style="background:#202020;"></div>
-          </div>
-        </div>
-        <div class="feat-card sm" data-reveal>
-          <div class="feat-label">Unlimited Themes</div>
-          <h4 class="feat-title sm">7 built-in + custom</h4>
-          <p class="feat-desc sm">Design your own. Syncs via iCloud.</p>
-          <div class="cue-dots">
-            <div style="background:#0D1B2A;"></div>
-            <div style="background:#1A0A1E;"></div>
-            <div style="background:#0F1A14;"></div>
-            <div style="background:#2A1A0D;"></div>
-            <div style="background:#1A2A28;"></div>
-          </div>
-        </div>
-        <div class="feat-card sm" data-reveal>
-          <div class="feat-label">Per-Site Rules</div>
-          <h4 class="feat-title sm">Whitelist or skip</h4>
-          <p class="feat-desc sm">Skip sites you want untouched.</p>
-          <div class="cue-list">
-            <div><span>wikipedia.org</span> <span class="on">ON</span></div>
-            <div><span>youtube.com</span> <span class="on">ON</span></div>
-            <div><span>news.ycombinator.com</span> <span class="off">OFF</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
+<section class="price" id="pricing"><div class="c">
+  <div class="shead"><h2>One comfortable web. <span class="grad">Your price.</span></h2><p>Own it forever, or pay monthly — either way, try free for 3 days first.</p></div>
+  <div class="pcards">
+    <div class="pc sub"><div class="plan">Monthly</div><div class="amt">$1.99<small>/mo</small></div><div class="n">cancel anytime</div>
+      <a class="cta" href="https://apps.apple.com/us/app/aurora-safari-dark-themes/id6751903540">Start monthly</a></div>
+    <div class="pc hero"><span class="best">Best value</span><div class="plan">Lifetime</div><div class="amt">$5.99<small>once</small></div><div class="n">pay once · yours forever · all updates</div>
+      <a class="cta" href="https://apps.apple.com/us/app/aurora-safari-dark-themes/id6751903540">Own it forever</a></div>
   </div>
-</section>
+  <div class="pcap">Lifetime or monthly · 3-day free trial · no card needed</div>
+</div></section>
 
-<!-- PRICING -->
-<section id="pricing" class="section-pricing section-v2">
-  <div class="container">
-    <div class="price-block">
-      <div class="price-row-main">
-        <div class="price-main">$5.99</div>
-        <div class="price-once">once.</div>
-      </div>
-      <div class="price-compare">
-        <div class="price-strike">$29.99/yr</div>
-        <div class="price-caption">…what subscription apps charge for less.</div>
-      </div>
-      <div class="price-divider"></div>
-      <p class="price-guarantees"><b>No subscription</b> · <b>3-day free trial</b> · <b>No card needed</b></p>
-      <a href="https://apps.apple.com/us/app/aurora-safari-dark-themes/id6751903540" class="price-cta" data-magnetic>
-        <img src="assets/app-store-badge.svg" alt="Download on the App Store" height="48">
-      </a>
-    </div>
+<section class="faq" id="faq"><div class="c" style="max-width:760px">
+  <div class="shead"><div class="q">Still wondering?</div><h2>Questions.</h2></div>
+  <details open><summary>Is there a Mac version?</summary><p>A Mac version is in <b style="color:var(--ink)">active development — coming soon</b>. It brings Mac-only powers like changing the web font &amp; size on any site, alongside the full theming engine.</p></details>
+  <details><summary>What's the refund policy?</summary><p>Standard Apple App Store policy. The 3-day free trial needs no payment info, so you can try before you buy.</p></details>
+  <details><summary>Does Aurora collect any data?</summary><p>Only anonymous product-usage stats via TelemetryDeck — no personal data, no tracking, and your browsing never leaves your device. See the <a href="privacy.html">Privacy Policy</a>.</p></details>
+  <details><summary>How is it different from Noir or Dark Reader?</summary><p>Aurora is built specifically for iOS — Focus Filter, Control Center, Live Activity, Auto Schedule, Siri/Shortcuts — and soon, Mac web-fonts. Stable on iOS 18+.</p></details>
+</div></section>
 
-    <div id="faq" class="faq-block">
-      <div class="faq-eyebrow">Still wondering?</div>
-      <details class="faq-item" data-reveal>
-        <summary>What's the refund policy?</summary>
-        <p>Standard Apple App Store refund policy. The 3-day free trial requires no payment info, so you can try before you buy.</p>
-      </details>
-      <details class="faq-item" data-reveal>
-        <summary>Is there a Mac version?</summary>
-        <p>Currently iOS and iPadOS only. Mac support is being evaluated.</p>
-      </details>
-      <details class="faq-item" data-reveal>
-        <summary>How is Aurora different from Noir or Dark Reader?</summary>
-        <p>Aurora is the only Safari dark mode built specifically for iOS — with Focus Filter, Control Center widget, Live Activity, Auto Schedule, and Siri/Shortcuts integration. Tested and stable on iOS 18+.</p>
-      </details>
-    </div>
-  </div>
-</section>
+<section class="founder"><div class="c">
+  <p class="fq">"I built Aurora because I read a lot at night and nothing worked the way I wanted. <b>If you have feedback, just email me — I read everything.</b> Every update comes from real users, not a roadmap."</p>
+  <div class="fsig"><div class="fav">D</div><div><div class="fname">Danny</div><div class="fhandle">Maker of Aurora · <a href="mailto:danny.ng.it@gmail.com">danny.ng.it@gmail.com</a></div></div></div>
+</div></section>
 
-<!-- FOUNDER NOTE -->
-<section class="founder-section">
-  <div class="container founder-inner">
-    <div class="founder-quote">
-      <p>"I built Aurora because I read a lot at night and nothing worked the way I wanted.
-        <strong>If you have feedback, just email me — I read everything.</strong>
-        Every update comes from real users, not a product roadmap."</p>
-      <div class="founder-sig">
-        <div class="founder-avatar">D</div>
-        <div>
-          <div class="founder-name">Danny</div>
-          <div class="founder-handle">Maker of Aurora</div>
-        </div>
-      </div>
-    </div>
-    <div class="founder-contact">
-      <a href="mailto:danny.ng.it@gmail.com">✉ danny.ng.it@gmail.com</a>
-    </div>
-  </div>
-</section>
+<footer><div class="c fin"><div>© 2026 Aurora · Made for iOS · Mac coming soon</div><div><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="support.html">Support</a></div></div></footer>
 
-<!-- MINIMAL FOOTER -->
-<footer class="site-footer-min">
-  <div class="container site-footer-inner">
-    <div>© 2026 Aurora · Made for iOS</div>
-    <div class="site-footer-links">
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="support.html">Support</a>
-    </div>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+<script>
+  var sites=["Wikipedia","YouTube","Google","Reddit","X","Amazon","Medium","NYTimes","CNN","Pinterest","IMDb","Etsy","Slack"];
+  var st=document.getElementById('strack'),h="";
+  for(var r=0;r<2;r++){sites.forEach(function(s){h+="<span>"+s+"</span><span class='dot'>·</span>";});}
+  st.innerHTML=h;
+  var revs=[["★★★★★","That's what Safari was missing.","-mZn-, US",0],
+   ["","Not gonna lie, I like this app! Much love from Malaysia.","Dato Wafiy Aziz, Malaysia",1],
+   ["★★★★★","Finally my eyes don't burn from the bright white.","Belimicek, Croatia",0],
+   ["★★★★★","Best app for dark mode — worth every penny.","Zed, US",0],
+   ["★★★★★","Image Dimming is AMAZING. Support good devs who care.","A.PALNAV, Mexico",0],
+   ["★★★★★","Your eyes will thank you — strongly recommended.","IamJohnRT, US",0]];
+  var rt=document.getElementById('rtrack'),rh="";
+  function card(v){return "<div class='vq"+(v[3]?" reddit":"")+"'>"+(v[3]?"<div class='red'>↗ found on Reddit</div>":"<div class='st'>"+v[0]+"</div>")+"<q>“"+v[1]+"”</q><div class='by'>— "+v[2]+"</div></div>";}
+  for(var k=0;k<2;k++){revs.forEach(function(v){rh+=card(v);});}
+  rt.innerHTML=rh;
+  (function(){var cmp=document.getElementById('cmp'),dk=document.getElementById('cmpdark'),ha=document.getElementById('handle'),kn=document.getElementById('knob'),drag=false;
+   function set(x){var b=cmp.getBoundingClientRect(),p=Math.max(4,Math.min(96,(x-b.left)/b.width*100));dk.style.clipPath="inset(0 0 0 "+p+"%)";ha.style.left=p+"%";kn.style.left=p+"%";}
+   function dn(e){drag=true;e.preventDefault();}function mv(e){if(!drag)return;set((e.touches?e.touches[0]:e).clientX);}function up(){drag=false;}
+   kn.addEventListener('mousedown',dn);kn.addEventListener('touchstart',dn,{passive:false});window.addEventListener('mousemove',mv);window.addEventListener('touchmove',mv,{passive:false});window.addEventListener('mouseup',up);window.addEventListener('touchend',up);
+   cmp.addEventListener('click',function(e){if(e.target!==kn)set(e.clientX);});})();
+  (function(){var s=document.getElementById('blf'),p=document.getElementById('blfpct'),fx=document.getElementById('warmfx');
+   function u(){p.textContent=s.value+"%";fx.style.opacity=(s.value/100*0.7).toFixed(2);}s.addEventListener('input',u);u();})();
+</script>
 </body>
 </html>
