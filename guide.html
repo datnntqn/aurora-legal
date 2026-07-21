@@ -116,6 +116,16 @@
   .theme-swatches { display: flex; gap: 8px; margin: 14px 0; }
   .theme-swatches div { width: 34px; height: 24px; border-radius: 6px; border: 1px solid var(--border-strong); }
 
+  /* Real app screenshots */
+  .shot { margin: 16px 0; }
+  .shot img { width: 100%; height: auto; border: 1px solid var(--border-strong); border-radius: var(--radius-md); }
+  .shot figcaption { font-size: 12px; color: var(--text-tertiary); margin-top: 6px; }
+  .shot-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+  .shot-pair .shot, .shot-grid .shot { margin: 0; }
+  .shot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; margin: 16px 0; }
+  .shot-grid .shot { max-width: 320px; }
+  @media (max-width: 480px) { .shot-grid { grid-template-columns: 1fr; } .shot-grid .shot { max-width: none; } }
+
   @media (max-width: 600px) {
     .guide-chips { top: 56px; }
     .guide-seg button { padding: 8px 18px; font-size: 13.5px; }
@@ -191,6 +201,10 @@
           <ol start="5">
             <li>Go back to Safari and refresh any open tab — the page should now be dark.</li>
           </ol>
+          <div class="shot-pair">
+            <figure class="shot"><img src="assets/screens/ios-before.jpg" alt="A Wikipedia article in Safari on iPhone before Aurora — bright white page" loading="lazy"><figcaption>Before — the default bright page</figcaption></figure>
+            <figure class="shot"><img src="assets/screens/ios-after.jpg" alt="The same Wikipedia article with Aurora dark mode on" loading="lazy"><figcaption>After — the same page with Aurora on</figcaption></figure>
+          </div>
           <div class="step-note"><strong>Shortcut:</strong> you can also do this from inside Safari — tap the <strong>aA</strong> (or puzzle-piece) button in the address bar → <strong>Manage Extensions</strong> → enable Aurora.</div>
         </section>
 
@@ -229,6 +243,13 @@
             <li><strong>Auto Schedule</strong>: in the Aurora app, set times to turn dark mode on and off every day.</li>
             <li><strong>Siri &amp; Shortcuts</strong>: Aurora's toggle actions appear in the Shortcuts app, so you can automate it or ask Siri.</li>
           </ol>
+          <div class="shot-grid">
+            <figure class="shot"><img src="assets/screens/ios-control-center-add.jpg" alt="iOS Control Center gallery with the Aurora toggle ready to add" loading="lazy"><figcaption>1 · Adding the Aurora control to Control Center</figcaption></figure>
+            <figure class="shot"><img src="assets/screens/ios-live-activity.jpg" alt="Lock Screen showing Aurora's Live Activity permission prompt" loading="lazy"><figcaption>2 · Live Activity on the Lock Screen</figcaption></figure>
+            <figure class="shot"><img src="assets/screens/ios-focus-filter.jpg" alt="Focus Filter screen with the Enable Aurora switch" loading="lazy"><figcaption>3 · Aurora as a Focus Filter</figcaption></figure>
+            <figure class="shot"><img src="assets/screens/ios-auto-schedule.jpg" alt="Aurora's Auto Schedule screen with time range and active days" loading="lazy"><figcaption>4 · Auto Schedule inside the app</figcaption></figure>
+            <figure class="shot"><img src="assets/screens/ios-shortcuts.jpg" alt="Shortcuts app search results listing Aurora's actions" loading="lazy"><figcaption>5 · Aurora actions in Shortcuts</figcaption></figure>
+          </div>
         </section>
 
         <section id="subscription" class="guide-section">
@@ -291,6 +312,8 @@
             <li>When Safari asks for permissions, choose <strong>Always Allow on Every Website</strong> — Aurora needs this to re-colour pages. Your browsing never leaves your Mac; see the <a href="privacy.html" class="wiki-link">Privacy Policy</a>.</li>
             <li>Refresh any open tab — it should now be dark.</li>
           </ol>
+          <figure class="shot"><img src="assets/screens/mac-before.jpg" alt="A Wikipedia article in Safari on Mac before Aurora — bright white page" loading="lazy"><figcaption>Before — Safari on the Mac without Aurora</figcaption></figure>
+          <figure class="shot"><img src="assets/screens/mac-after.jpg" alt="The same Wikipedia article on Mac with Aurora dark mode on" loading="lazy"><figcaption>After — the same page, Aurora on</figcaption></figure>
         </section>
 
         <section id="mac-fonts" class="guide-section">
@@ -301,6 +324,7 @@
             <li>Pick a font and size — every site you visit renders with your choice, from news sites to documentation.</li>
             <li>Turn it off per site if a page's own typography matters to you.</li>
           </ol>
+          <figure class="shot"><img src="assets/screens/mac-popup-fonts.jpg" alt="Aurora's Safari toolbar popup on Mac with the font picker open, listing Georgia, Verdana, Charter, Literata, Inter, and Atkinson Hyperlegible" loading="lazy"><figcaption>The Aurora popup in Safari's toolbar — pick a font and size per site</figcaption></figure>
           <div class="step-note"><strong>Fonts and dark mode are completely independent.</strong> Your reading font applies with dark mode on or off — and turning dark mode off never touches your font settings. Use either one alone, or both together.</div>
           <div class="step-note">Great for long reads: pair a serif reading font with a warm theme and the Blue Light Filter for a paper-like page at 2am.</div>
         </section>
@@ -313,11 +337,13 @@
             <div style="background:#0f1a14"></div><div style="background:#2a1a0d"></div><div style="background:#20222c"></div><div style="background:#000"></div>
           </div>
           <p>Custom themes you made on iPhone or iPad appear on the Mac automatically via <strong>iCloud sync</strong> — and the other way round.</p>
+          <figure class="shot"><img src="assets/screens/mac-themes.jpg" alt="The Aurora Mac app's Themes screen with the custom theme editor open — colour wheel, brightness, contrast, blue light filter, and image dimming controls" loading="lazy"><figcaption>The Themes screen in the Mac app — build your own with live preview</figcaption></figure>
         </section>
 
         <section id="mac-menubar" class="guide-section">
           <h2>4 · Menu bar toggle</h2>
           <p>On the Mac, the quick toggle lives in the <strong>menu bar</strong>: click the Aurora icon at the top of your screen to flip dark mode for Safari without opening the app. It's the Mac counterpart of the iOS Control Center toggle.</p>
+          <figure class="shot"><img src="assets/screens/mac-menubar.jpg" alt="Aurora's menu bar dropdown on Mac with the Dark Mode checkbox and web font controls" loading="lazy"><figcaption>The menu bar dropdown — dark mode and font controls one click away</figcaption></figure>
           <div class="step-note">Control Center widgets and Live Activities are iOS features — on the Mac the menu bar icon covers the same job.</div>
         </section>
 
