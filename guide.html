@@ -4,46 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Guide — Aurora</title>
-  <meta name="description" content="How to set up and use Aurora — Safari Dark Themes: enable the extension, pick themes, eye-care filters, quick controls, and troubleshooting.">
+  <meta name="description" content="How to set up and use Aurora — Safari Dark Themes on iPhone, iPad, and Mac: enable the extension, pick themes, eye-care filters, quick controls, and troubleshooting.">
   <meta name="robots" content="index, follow">
   <meta property="og:title" content="User Guide — Aurora">
+  <meta property="og:description" content="Set up Aurora on iPhone, iPad, and Mac — extension setup, themes, eye care, and troubleshooting.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://datnntqn.github.io/aurora-legal/guide.html">
   <link rel="icon" type="image/png" href="assets/aurora-icon-128.png">
   <link rel="apple-touch-icon" href="assets/aurora-icon-180.png">
   <link rel="stylesheet" href="style.css">
   <style>
-  /* Guide-only styles. Shared look comes from style.css; keep this block scoped
-     to .guide-* and .mock-* classes so it can't leak into other pages. */
-  .guide-grid { display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
-  .guide-toc { position: sticky; top: 84px; }
-  .guide-toc nav { display: flex; flex-direction: column; gap: 2px; }
-  .guide-toc a {
-    padding: 7px 12px; border-radius: 8px; font-size: 13.5px;
-    color: var(--text-tertiary); border-left: 2px solid var(--border-card);
+  /* Guide-only styles, scoped to .guide-* and .mock-* so nothing leaks into
+     other pages. Layout: single centred column + platform tabs + chip TOC. */
+  .guide-head { text-align: center; max-width: 640px; margin: 0 auto; }
+  .guide-col { max-width: 760px; margin: 0 auto; }
+
+  /* Platform switcher — teal carries iOS, violet carries macOS, matching the
+     homepage's live/mac colour language. */
+  .guide-seg { display: flex; justify-content: center; gap: 8px; margin: 28px auto 18px; }
+  .guide-seg button {
+    border: 1px solid var(--border-strong); background: transparent; color: var(--text-secondary);
+    font-size: 14px; font-weight: 700; padding: 9px 26px; border-radius: 999px;
+    transition: background .15s, color .15s, border-color .15s;
   }
-  .guide-toc a:hover { color: var(--text-primary); background: var(--bg-card); }
-  .guide-toc .toc-label {
-    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--text-muted); margin: 0 0 8px 12px;
+  .guide-seg button:hover { color: var(--text-primary); }
+  .guide-seg button[aria-selected="true"] { color: #06120f; border-color: transparent; }
+  .guide-seg button.seg-ios[aria-selected="true"] { background: var(--accent2); }
+  .guide-seg button.seg-mac[aria-selected="true"] { background: var(--accent); color: #0d0716; }
+
+  /* Chip TOC — one horizontal row, sticky under the site nav, scrollable when narrow. */
+  .guide-chips {
+    position: sticky; top: 62px; z-index: 10;
+    display: flex; gap: 6px; justify-content: center; overflow-x: auto;
+    padding: 10px 4px; margin: 0 -4px 26px;
+    background: linear-gradient(180deg, var(--bg-elevated) 60%, transparent);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    scrollbar-width: none;
   }
-  .guide-toc-mobile { display: none; }
-  @media (max-width: 760px) {
-    .guide-grid { display: block; }
-    .guide-toc { display: none; }
-    .guide-toc-mobile {
-      display: block; margin-bottom: 28px; background: var(--bg-elevated);
-      border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 12px 16px;
-    }
-    .guide-toc-mobile summary { cursor: pointer; font-weight: 700; font-size: 14px; }
-    .guide-toc-mobile a { display: block; padding: 8px 4px; font-size: 14px; color: var(--text-secondary); }
+  .guide-chips::-webkit-scrollbar { display: none; }
+  .guide-chips a {
+    flex-shrink: 0; font-size: 13px; color: var(--text-tertiary);
+    border: 1px solid var(--border-card); border-radius: 999px; padding: 5px 13px;
+    background: var(--bg-card);
   }
-  .guide-section { scroll-margin-top: 84px; }
+  .guide-chips a:hover { color: var(--text-primary); border-color: var(--border-strong); }
+  /* With justify-content:center a long overflowing row would clip its left edge;
+     safe-center isn't supported everywhere, so pad the edges and let it scroll. */
+  @media (max-width: 700px) { .guide-chips { justify-content: flex-start; } }
+
+  .guide-panel[hidden] { display: none; }
+  .guide-section { scroll-margin-top: 118px; }
+
   .step-note {
     background: var(--bg-card); border: 1px solid var(--border-card);
     border-left: 3px solid var(--brand-purple); border-radius: var(--radius-sm);
     padding: 10px 14px; font-size: 13.5px; color: var(--text-secondary); margin: 14px 0;
   }
+
   /* CSS-built iOS Settings illustration */
   .mock-settings {
     max-width: 340px; background: #000; border: 1px solid var(--border-strong);
@@ -73,10 +90,36 @@
   }
   .mock-toggle.on { background: var(--success); }
   .mock-toggle.on::after { left: auto; right: 2px; }
-  .mock-caption { font-size: 12px; color: var(--text-tertiary); max-width: 340px; margin: -6px 0 16px; }
-  /* Theme swatch strip */
+  .mock-caption { font-size: 12px; color: var(--text-tertiary); max-width: 400px; margin: -6px 0 16px; }
+
+  /* CSS-built macOS window illustration (Safari Settings → Extensions) */
+  .mock-mac {
+    max-width: 400px; background: #1e1e24; border: 1px solid var(--border-strong);
+    border-radius: 10px; margin: 16px 0; font-size: 13px; color: #eee; overflow: hidden;
+  }
+  .mock-mac .mock-titlebar {
+    display: flex; align-items: center; gap: 6px; padding: 9px 12px;
+    background: #26262e; border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 12px; color: rgba(255,255,255,0.6);
+  }
+  .mock-mac .tl { width: 11px; height: 11px; border-radius: 50%; }
+  .mock-mac .tl.r { background: #ff5f57; } .mock-mac .tl.y { background: #febc2e; } .mock-mac .tl.g { background: #28c840; }
+  .mock-mac .mock-titlebar span { margin-left: 8px; }
+  .mock-mac .mock-body { padding: 10px 12px 12px; }
+  .mock-mac .mock-row { background: rgba(255,255,255,0.06); }
+  .mock-checkbox {
+    width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0;
+    background: var(--brand-blue); color: #fff; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+
   .theme-swatches { display: flex; gap: 8px; margin: 14px 0; }
   .theme-swatches div { width: 34px; height: 24px; border-radius: 6px; border: 1px solid var(--border-strong); }
+
+  @media (max-width: 600px) {
+    .guide-chips { top: 56px; }
+    .guide-seg button { padding: 8px 18px; font-size: 13.5px; }
+  }
   </style>
 </head>
 <body>
@@ -98,34 +141,29 @@
 </nav>
 
 <main class="legal-page">
-  <div class="container legal-container">
-    <h1>Aurora User Guide</h1>
-    <p class="legal-updated">Everything from first setup to fixing a broken site. 5-minute read.</p>
+  <div class="container">
+    <div class="guide-head">
+      <h1>Aurora User Guide</h1>
+      <p class="legal-updated">Everything from first setup to fixing a broken site — on iPhone, iPad, and Mac.</p>
+    </div>
 
-    <details class="guide-toc-mobile">
-      <summary>On this page</summary>
-      <a href="#setup">1 · Getting started</a>
-      <a href="#themes">2 · Themes &amp; colours</a>
-      <a href="#reading">3 · Eye care</a>
-      <a href="#controls">4 · Quick controls</a>
-      <a href="#subscription">5 · Trial &amp; pricing</a>
-      <a href="#troubleshooting">6 · Troubleshooting</a>
-    </details>
+    <div class="guide-seg" role="tablist" aria-label="Platform">
+      <button class="seg-ios" id="tab-ios" role="tab" aria-selected="true" aria-controls="panel-ios">iOS &amp; iPadOS</button>
+      <button class="seg-mac" id="tab-mac" role="tab" aria-selected="false" aria-controls="panel-mac">macOS</button>
+    </div>
 
-    <div class="guide-grid">
-      <aside class="guide-toc">
-        <p class="toc-label">On this page</p>
-        <nav>
-          <a href="#setup">1 · Getting started</a>
-          <a href="#themes">2 · Themes &amp; colours</a>
-          <a href="#reading">3 · Eye care</a>
-          <a href="#controls">4 · Quick controls</a>
-          <a href="#subscription">5 · Trial &amp; pricing</a>
-          <a href="#troubleshooting">6 · Troubleshooting</a>
-        </nav>
-      </aside>
+    <!-- ============================== iOS ============================== -->
+    <div class="guide-panel" id="panel-ios" role="tabpanel" aria-labelledby="tab-ios">
+      <div class="guide-chips">
+        <a href="#setup">1 · Setup</a>
+        <a href="#themes">2 · Themes</a>
+        <a href="#reading">3 · Eye care</a>
+        <a href="#controls">4 · Quick controls</a>
+        <a href="#subscription">5 · Pricing</a>
+        <a href="#troubleshooting">6 · Troubleshooting</a>
+      </div>
 
-      <div class="guide-content">
+      <div class="guide-col">
 
         <section id="setup" class="guide-section">
           <h2>1 · Getting started</h2>
@@ -166,7 +204,7 @@
           <ol>
             <li>Open the Aurora app and pick any theme — it applies to Safari instantly.</li>
             <li>To make your own, choose <strong>Custom</strong> and adjust the colours until it feels right.</li>
-            <li>Custom themes sync across your devices via <strong>iCloud</strong> — nothing to set up.</li>
+            <li>Custom themes sync across your devices via <strong>iCloud</strong> — including your Mac.</li>
           </ol>
           <div class="step-note">Themes re-colour pages instead of inverting them, so layout, links, and images stay exactly where the site's designer put them.</div>
         </section>
@@ -178,7 +216,7 @@
             <li><strong>Blue Light Filter</strong> — warms the page from 0 to 100%. Set it in the Aurora app; higher values feel like a paper page under lamplight.</li>
             <li><strong>Image Dimming</strong> — tones down bright photos that would otherwise glare against a dark page. Adjustable per site, so photography sites can stay vivid while news sites stay calm.</li>
           </ol>
-          <div class="step-note">Changing the web font &amp; size is coming in the Mac version of Aurora — it's not part of the iOS app yet.</div>
+          <div class="step-note">On a Mac, Aurora can also change the web font &amp; size on any site — see the <a href="#mac-fonts" class="wiki-link">macOS guide</a>.</div>
         </section>
 
         <section id="controls" class="guide-section">
@@ -198,6 +236,7 @@
           <ol>
             <li>Every feature is free for <strong>3 days</strong> — no payment info required to start the trial.</li>
             <li>After that, keep Aurora with either plan, purchased inside the app: <strong>$1.99/month</strong> (cancel anytime) or <strong>$5.99 once</strong> for lifetime access and all future updates.</li>
+            <li>One purchase covers <strong>both iPhone/iPad and Mac</strong> — Aurora is a universal purchase on the same Apple Account.</li>
             <li>Reinstalled or switched phones? Tap <strong>Restore Purchases</strong> in the Aurora app.</li>
             <li>Refunds follow the standard App Store policy — request one via your <a href="https://reportaproblem.apple.com/" class="wiki-link">Apple purchase history</a>. Details in the <a href="terms.html" class="wiki-link">Terms of Service</a>.</li>
           </ol>
@@ -218,12 +257,95 @@
 
       </div>
     </div>
+
+    <!-- ============================== macOS ============================== -->
+    <div class="guide-panel" id="panel-mac" role="tabpanel" aria-labelledby="tab-mac" hidden>
+      <div class="guide-chips">
+        <a href="#mac-setup">1 · Setup</a>
+        <a href="#mac-fonts">2 · Fonts &amp; text</a>
+        <a href="#mac-themes">3 · Themes &amp; eye care</a>
+        <a href="#mac-menubar">4 · Menu bar</a>
+        <a href="#mac-pricing">5 · Pricing</a>
+        <a href="#mac-troubleshooting">6 · Troubleshooting</a>
+      </div>
+
+      <div class="guide-col">
+
+        <section id="mac-setup" class="guide-section">
+          <h2>1 · Getting started on Mac</h2>
+          <p>Aurora for Mac is the same app on the <a href="https://apps.apple.com/us/app/aurora-safari-dark-themes/id6751903540" class="wiki-link">same App Store listing</a> — install it on your Mac, then enable the Safari extension once:</p>
+          <ol>
+            <li>Download Aurora from the Mac App Store and open it. The app shows an <strong>Enable Extension</strong> button that takes you straight to the right Safari screen.</li>
+            <li>Or manually: in Safari, open <strong>Safari → Settings… (⌘,) → Extensions</strong>.</li>
+            <li>Tick the checkbox next to <strong>Aurora</strong>.</li>
+          </ol>
+          <div class="mock-mac" aria-hidden="true">
+            <div class="mock-titlebar"><div class="tl r"></div><div class="tl y"></div><div class="tl g"></div><span>Extensions</span></div>
+            <div class="mock-body">
+              <div class="mock-row hilite"><div class="mock-checkbox">✓</div><div class="mock-icon aurora">☾</div><div class="mock-label">Aurora</div></div>
+              <div class="mock-row"><div class="mock-checkbox" style="background:#3a3a44"></div><div class="mock-icon sys">▦</div><div class="mock-label">Other extension</div></div>
+            </div>
+          </div>
+          <p class="mock-caption">Safari → Settings → Extensions: tick Aurora.</p>
+          <ol start="4">
+            <li>When Safari asks for permissions, choose <strong>Always Allow on Every Website</strong> — Aurora needs this to re-colour pages. Your browsing never leaves your Mac; see the <a href="privacy.html" class="wiki-link">Privacy Policy</a>.</li>
+            <li>Refresh any open tab — it should now be dark.</li>
+          </ol>
+        </section>
+
+        <section id="mac-fonts" class="guide-section">
+          <h2>2 · Your reading font, any site</h2>
+          <p>The Mac-exclusive power: Aurora can change the <strong>web font and text size on any website</strong>, on top of the theming engine.</p>
+          <ol>
+            <li>Open the Aurora app on your Mac and go to the <strong>Fonts</strong> settings.</li>
+            <li>Pick a font and size — every site you visit renders with your choice, from news sites to documentation.</li>
+            <li>Turn it off per site if a page's own typography matters to you.</li>
+          </ol>
+          <div class="step-note"><strong>Fonts and dark mode are completely independent.</strong> Your reading font applies with dark mode on or off — and turning dark mode off never touches your font settings. Use either one alone, or both together.</div>
+          <div class="step-note">Great for long reads: pair a serif reading font with a warm theme and the Blue Light Filter for a paper-like page at 2am.</div>
+        </section>
+
+        <section id="mac-themes" class="guide-section">
+          <h2>3 · Themes &amp; eye care</h2>
+          <p>The full theming engine from iOS runs on the Mac — same <strong>7 built-in themes</strong>, unlimited custom themes, <strong>Blue Light Filter</strong> (0–100%), and per-site <strong>Image Dimming</strong>.</p>
+          <div class="theme-swatches" aria-hidden="true">
+            <div style="background:#0d1b2a"></div><div style="background:#10131a"></div><div style="background:#1a0a1e"></div>
+            <div style="background:#0f1a14"></div><div style="background:#2a1a0d"></div><div style="background:#20222c"></div><div style="background:#000"></div>
+          </div>
+          <p>Custom themes you made on iPhone or iPad appear on the Mac automatically via <strong>iCloud sync</strong> — and the other way round.</p>
+        </section>
+
+        <section id="mac-menubar" class="guide-section">
+          <h2>4 · Menu bar toggle</h2>
+          <p>On the Mac, the quick toggle lives in the <strong>menu bar</strong>: click the Aurora icon at the top of your screen to flip dark mode for Safari without opening the app. It's the Mac counterpart of the iOS Control Center toggle.</p>
+          <div class="step-note">Control Center widgets and Live Activities are iOS features — on the Mac the menu bar icon covers the same job.</div>
+        </section>
+
+        <section id="mac-pricing" class="guide-section">
+          <h2>5 · Trial &amp; pricing</h2>
+          <ol>
+            <li>The Mac app has the same <strong>3-day free trial</strong> with everything unlocked, no payment info needed.</li>
+            <li>Aurora is a <strong>universal purchase</strong>: buy once — <strong>$1.99/month</strong> or <strong>$5.99 lifetime</strong> — and it unlocks on iPhone, iPad, and Mac with the same Apple Account.</li>
+            <li>Already bought it on iPhone? Just open the Mac app and choose <strong>Restore Purchases</strong>.</li>
+          </ol>
+        </section>
+
+        <section id="mac-troubleshooting" class="guide-section">
+          <h2>6 · Troubleshooting</h2>
+          <p><strong>Aurora isn't listed in Safari → Settings → Extensions.</strong> Open the Aurora app once so macOS registers the extension, then check again. Still missing? Quit and reopen Safari.</p>
+          <p><strong>Pages aren't turning dark.</strong> Check that Aurora's checkbox is ticked in Safari's Extensions settings <em>and</em> that it's allowed on every website. Then refresh the tab.</p>
+          <p><strong>A site looks broken with Aurora on.</strong> Same fix as iOS: Aurora app → <strong>Rules</strong> → add the site to the <strong>Blacklist</strong>, try another theme, or email the URL to <a href="mailto:danny.ng.it@gmail.com" class="wiki-link">danny.ng.it@gmail.com</a>.</p>
+          <p>Anything else — see the <a href="support.html" class="wiki-link">Support page</a>.</p>
+        </section>
+
+      </div>
+    </div>
   </div>
 </main>
 
 <footer class="site-footer-min">
   <div class="container site-footer-inner">
-    <div>© 2026 Aurora · Made for iOS</div>
+    <div>© 2026 Aurora · Made for iOS &amp; Mac</div>
     <div class="site-footer-links">
       <a href="index.html">Home</a>
       <a href="guide.html">Guide</a>
@@ -235,5 +357,30 @@
 </footer>
 
 <script src="script.js"></script>
+<script>
+(function () {
+  var tabs = { ios: document.getElementById('tab-ios'), mac: document.getElementById('tab-mac') };
+  var panels = { ios: document.getElementById('panel-ios'), mac: document.getElementById('panel-mac') };
+  function show(platform) {
+    Object.keys(panels).forEach(function (key) {
+      var active = key === platform;
+      panels[key].hidden = !active;
+      tabs[key].setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  }
+  tabs.ios.addEventListener('click', function () { show('ios'); });
+  tabs.mac.addEventListener('click', function () { show('mac'); });
+  // Deep links: #mac-* anchors open the macOS tab first, everything else the iOS tab.
+  function syncToHash() {
+    var hash = location.hash;
+    if (!hash) return;
+    show(hash.indexOf('#mac-') === 0 ? 'mac' : 'ios');
+    var target = document.querySelector(hash);
+    if (target) target.scrollIntoView();
+  }
+  window.addEventListener('hashchange', syncToHash);
+  syncToHash();
+})();
+</script>
 </body>
 </html>

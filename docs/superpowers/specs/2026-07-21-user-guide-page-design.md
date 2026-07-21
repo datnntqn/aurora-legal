@@ -46,3 +46,11 @@ Add a full user guide page to the Aurora legal/marketing site, serving two audie
 - `guide.html` renders correctly on mobile and desktop with working TOC anchors.
 - All five pages show the "Guide" nav link.
 - Content accurately reflects the app's shipped features (verify feature names against the app before publishing).
+
+## Revision — 2026-07-21 (v2)
+
+After reviewing v1 in the browser, layout revised per user feedback (excess left space from the 220px TOC inside the 720px container):
+
+- **Layout:** platform tab switcher (iOS & iPadOS / macOS) + horizontal sticky chip TOC + single centred ~760px column. Small inline JS handles tab switching; `#mac-*` deep links open the macOS tab.
+- **macOS released:** the guide now documents both platforms. Mac facts: Universal Purchase (same App ID 6751903540, one purchase unlocks iOS + Mac), 3-day trial, menu bar toggle replaces Control Center, no Live Activity on Mac, Mac-exclusive web font & size control — fonts and dark mode are fully independent features (explicit user requirement).
+- **Site-wide copy fix:** all "Mac coming soon / in active development" copy on index.html and support.html updated to released status.
