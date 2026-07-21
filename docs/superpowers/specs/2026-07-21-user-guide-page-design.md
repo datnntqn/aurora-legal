@@ -33,7 +33,7 @@ Add a full user guide page to the Aurora legal/marketing site, serving two audie
 ## Integration changes
 
 - `support.html`: the "Safari extension setup" section links to `guide.html#setup` instead of duplicating the steps.
-- Guide-specific CSS (TOC, step illustrations) is appended to `style.css` or kept in a `<style>` block in `guide.html`; shared styles continue to come from `style.css`.
+- Guide-specific CSS (TOC, step illustrations) lives in a `<style>` block inside `guide.html`, keeping the shared `style.css` unchanged; shared styles continue to come from `style.css`.
 
 ## Out of scope
 
