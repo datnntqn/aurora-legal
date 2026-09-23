@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — Aurora</title>
-  <meta name="description" content="Aurora collects anonymous usage stats only. No personal data, no IDFA, no tracking across apps.">
+  <meta name="description" content="Aurora processes pages on your device. Optional site reports share the page information you choose to send. No IDFA or cross-app tracking.">
   <meta name="robots" content="index, follow">
   <meta property="og:title" content="Privacy Policy — Aurora">
-  <meta property="og:description" content="Aurora collects anonymous usage stats only. No personal data, no IDFA, no tracking across apps.">
+  <meta property="og:description" content="Aurora processes pages on your device. Optional site reports share the page information you choose to send. No IDFA or cross-app tracking.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://datnntqn.github.io/aurora-legal/privacy.html">
   <link rel="icon" type="image/png" href="assets/aurora-icon-128.png">
@@ -34,11 +34,11 @@
 <main class="legal-page">
   <div class="container legal-container">
     <h1>Privacy Policy</h1>
-    <p class="legal-updated">Last updated: July 4, 2026</p>
+    <p class="legal-updated">Last updated: September 23, 2026</p>
 
     <section>
       <h2>Summary</h2>
-      <p><strong>Aurora collects anonymous usage statistics only — no personal data, no IDFA, no tracking across other apps. Your browsing history and page contents never leave your device.</strong></p>
+      <p><strong>Aurora processes pages on your device and collects anonymous product usage statistics. If you choose to send a site bug report, Aurora receives the reported page URL, an optional screenshot and note, and settings and device details. Aurora does not use IDFA or track you across other apps.</strong></p>
       <p>This policy explains exactly what is collected, what is not, and how to opt out.</p>
     </section>
 
@@ -54,9 +54,9 @@
         <li>Purchase completed / failed (no payment details, just outcome)</li>
         <li>App version and a randomly generated install ID (UUID, regenerated on every reinstall)</li>
       </ul>
-      <p><strong>What we do NOT collect:</strong></p>
+      <p><strong>What usage analytics do NOT collect:</strong></p>
       <ul>
-        <li>No browsing history, URLs, or page contents</li>
+        <li>No browsing history, URLs, or page contents through usage analytics. Optional site reports are described below.</li>
         <li>No theme contents or custom theme designs</li>
         <li>No personal identifiers — no Apple ID, no email, no name</li>
         <li>No IDFA (Apple's advertising identifier)</li>
@@ -82,7 +82,7 @@
 
     <section>
       <h2>What's stored on your device</h2>
-      <p>Aurora stores the following locally in <code>UserDefaults</code> and an App Group container shared between the iOS app, the Safari extension, and the Control Center widget. <strong>This data never leaves your device.</strong></p>
+      <p>Aurora stores the following locally in <code>UserDefaults</code> and an App Group container shared between the iOS app, the Safari extension, and the Control Center widget. <strong>These preferences stay on your device except for the limited settings you choose to include when sending a site report.</strong></p>
       <ul>
         <li>Your theme list (default + custom themes you create)</li>
         <li>Pro / trial status (from StoreKit)</li>
@@ -100,7 +100,21 @@
 
     <section>
       <h2>What the Safari extension sees</h2>
-      <p>The Safari Web Extension reads each page's CSS to apply dark mode styles. <strong>It does not transmit page content anywhere.</strong> The extension only communicates with Aurora's own host app via Apple's standard Safari Web Extension messaging API — and only to read your theme preferences. Nothing is sent over the network.</p>
+      <p>The Safari Web Extension reads each page’s CSS to apply dark mode styles locally and communicates with Aurora’s host app to synchronize preferences. Normal page styling does not send browsing information to Aurora. Only when you choose Send report does the extension transmit the site report described below.</p>
+    </section>
+
+    <section>
+      <h2>Site bug reports (opt-in)</h2>
+      <p>You can report a rendering problem from Aurora’s Safari popup. Nothing is uploaded until you press Send report. Review the screenshot for private information and remove it if you prefer. Screenshots and notes may contain personal information you include, and URL paths may identify page content.</p>
+      <ul>
+        <li>The current page’s origin and path and its hostname. URL credentials, query strings and fragments are removed.</li>
+        <li>The issue categories you select, your optional note (up to 1,000 characters), and one optional screenshot of the visible page.</li>
+        <li>Platform, operating-system version, Aurora version, device model (not a unique device identifier), and popup language.</li>
+        <li>Whether dark mode and the site rule are enabled; active theme name, brightness, contrast, blue-light filter, image dimming, font family and font scale.</li>
+        <li>Trial-ended state, site-rule mode, system appearance, screenshot dimensions and size, and capture or upload error codes.</li>
+        <li>A random report ID and submission timestamp. No account, email, install ID, or browsing-history list is attached.</li>
+      </ul>
+      <p>Reports are sent directly to <strong>Supabase in US East (Northern Virginia)</strong> for diagnosing and fixing rendering problems. Screenshots are stored in a private bucket. Reports are not linked to a user identity or used for tracking or advertising. We retain reports and associated screenshots for up to <strong>12 months</strong>, then delete them. A screenshot upload that succeeds before a report fails may remain as an unattached file until cleanup.</p>
     </section>
 
     <section>
@@ -110,7 +124,7 @@
 
     <section>
       <h2>Third parties</h2>
-      <p>One: <strong>TelemetryDeck</strong> (described in the Analytics provider section above) — for anonymous product usage events only.</p>
+      <p><strong>TelemetryDeck</strong> handles anonymous product usage events. <strong>Supabase</strong> stores optional site bug reports and screenshots, as described above.</p>
       <p>That's it. No advertising networks. No crash reporting services other than Apple's standard channels. No data brokers. No social media SDKs. No marketing attribution services.</p>
     </section>
 
